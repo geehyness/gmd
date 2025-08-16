@@ -1008,7 +1008,6 @@ const HomePageClient: React.FC = () => {
                 align="center"
                 justifyContent="center"
                 p={4}
-                borderRadius="lg"
                 cursor="pointer"
                 onClick={handleContactClick}
                 {...glassCardProps}
