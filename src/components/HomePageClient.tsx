@@ -635,7 +635,6 @@ const HomePageClient: React.FC = () => {
         bottom={4}
         right={4}
         zIndex={60}
-        borderRadius="lg"
         p={3}
         width="320px"
         {...glassCardProps}
