@@ -45,7 +45,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Providers>
           <ClientLayout
-            siteTitle={siteSettings?.title || "Godliness Dongorere"}
+            siteTitle={"Godliness Dongorere"}
             siteLogoUrl={siteLogoUrl}
           >
             <Analytics />

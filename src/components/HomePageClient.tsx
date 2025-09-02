@@ -456,7 +456,7 @@ const HomePageClient: React.FC = () => {
               const distanceSq = dx * dx + dy * dy;
               if (distanceSq < configRef.current.maxConnectionDistance * configRef.current.maxConnectionDistance && Math.random() < configRef.current.connectionChance) {
                 const distance = Math.sqrt(distanceSq);
-                const alpha = 0.075 * (1 - distance / configRef.current.maxConnectionDistance);
+                const alpha = 0.1 * (1 - distance / configRef.current.maxConnectionDistance);
                 offscreenCtx.strokeStyle = `rgba(71, 85, 105, ${alpha})`; // slate-600 with alpha
                 offscreenCtx.beginPath();
                 offscreenCtx.moveTo(star.x, star.y);
