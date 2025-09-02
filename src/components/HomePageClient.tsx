@@ -300,7 +300,7 @@ const HomePageClient: React.FC = () => {
         ctx.rotate(this.rotation);
 
         // Darker stars for better visibility on light background
-        const starColor = 'rgba(51, 65, 85, 0.92)'; // slate-700 with opacity
+        const starColor = 'rgba(51, 65, 85, 0.46)';
 
         if (configRef.current.glowIntensity > 0.01) {
           ctx.shadowColor = 'rgba(15, 23, 42, 0.5)'; // slate-900 with opacity
@@ -456,7 +456,7 @@ const HomePageClient: React.FC = () => {
               const distanceSq = dx * dx + dy * dy;
               if (distanceSq < configRef.current.maxConnectionDistance * configRef.current.maxConnectionDistance && Math.random() < configRef.current.connectionChance) {
                 const distance = Math.sqrt(distanceSq);
-                const alpha = 0.15 * (1 - distance / configRef.current.maxConnectionDistance);
+                const alpha = 0.075 * (1 - distance / configRef.current.maxConnectionDistance);
                 offscreenCtx.strokeStyle = `rgba(71, 85, 105, ${alpha})`; // slate-600 with alpha
                 offscreenCtx.beginPath();
                 offscreenCtx.moveTo(star.x, star.y);
