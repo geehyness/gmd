@@ -40,7 +40,7 @@ export default async function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-        <meta name="theme-color" content="#FF4F00" />
+        <meta name="theme-color" content="#102E4A" />
       </head>
       <body className={inter.className}>
         <Providers>

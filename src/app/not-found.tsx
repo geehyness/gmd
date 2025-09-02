@@ -8,8 +8,8 @@ export default function NotFound() {
   const theme = useTheme(); // Initialize useTheme hook
 
   // Use theme colors for background and text
-  const bgColor = theme.colors.neutral.dark['bg-primary']; // Use dark primary background
-  const textColor = theme.colors.neutral.dark['text-primary']; // Use dark primary text color
+  const bgColor = theme.colors.neutral.light['bg-primary'];
+  const textColor = theme.colors.neutral.light['text-primary'];
   const buttonScheme = 'brand'; // This will automatically use your brand colors defined in theme.ts
 
   return (

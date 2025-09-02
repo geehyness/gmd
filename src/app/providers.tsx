@@ -22,14 +22,14 @@ export function Providers({ children }: ProvidersProps) {
     <ChakraProvider theme={themes}>
       <ThemeProvider
         attribute="class"
-        defaultTheme="dark" // Ensure dark mode is default
+        defaultTheme="light" // Ensure light mode is default
         enableSystem={false}
         disableTransitionOnChange
       >
         <PageTransitionProvider>
-{/**            <AuthProvider>*/}
+{/** <AuthProvider>*/}
             {children}
-{/**           </AuthProvider>*/}
+{/** </AuthProvider>*/}
         </PageTransitionProvider>
       </ThemeProvider>
     </ChakraProvider>
