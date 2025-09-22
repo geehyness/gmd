@@ -11,6 +11,8 @@ import {
 } from '@chakra-ui/react';
 import { FaChevronDown, FaRocket, FaTimes, FaCog, FaArrowRight } from 'react-icons/fa';
 import { FiMail, FiPhone, FiGithub, FiLinkedin } from 'react-icons/fi';
+import PublicProjects from './PublicProjects';
+
 
 const DEFAULT_CONFIG = {
   starCount: 80,
@@ -1137,6 +1139,11 @@ const HomePageClient: React.FC = () => {
           </SimpleGrid>
         </Box>
 
+        {/* Public Projects Section (new) */}
+        <Box mb={20} id="projects">
+          <PublicProjects />
+        </Box>
+
         <Box mb={20} {...glassCardProps} p={8} borderRadius="2xl">
           <VStack spacing={2} mb={6} textAlign="center">
             <Text color={accentRgba} fontWeight="bold">INTERESTS</Text>
@@ -1168,7 +1175,7 @@ const HomePageClient: React.FC = () => {
             _hover={{ bg: "gray.100" }}
             rightIcon={<FaArrowRight />}
             as="a"
-            href="/Godliness Dongorere Resume.pdf"
+            href="/Godliness_Dongorere_Resume.pdf"
             download
           >
             Download Full Resume
