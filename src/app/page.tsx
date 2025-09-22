@@ -14,7 +14,7 @@ import { Footer } from '@/components/Footer';
 // Metadata for the homepage
 export const metadata: Metadata = {
   title: 'Godliness Dongorere - Crafting Cutting-Edge Software Solutions',
-  description: 'Godliness Dongorere specializes in innovative software development, web applications, and digital transformation. Explore our projects and services.',
+  description: 'Godliness Dongorere specializes in innovative software development, web applications, and digital transformation. Explore some of my projects.',
 };
 
 // Function to fetch all necessary data on the server
