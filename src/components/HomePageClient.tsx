@@ -25,7 +25,7 @@ const DEFAULT_CONFIG = {
   scrollSensitivity: 0.0001,
   glowIntensity: 0,
   connectionChance: 0.5,
-  maxConnectionDistance: 100,
+  maxConnectionDistance: 150,
   rotationSpeed: 0.001,
   trailOpacity: 0.6,
   blackHole: {
@@ -935,7 +935,7 @@ const HomePageClient: React.FC = () => {
                 color={accentRgba}
                 _hover={{ bg: accentRgba, color: "white", transform: "scale(1.1)" }}
                 as="a"
-                href="https://github.com/gdongorere"
+                href="https://github.com/geehyness"
                 target="_blank"
                 boxShadow="md"
                 transition="all 0.2s ease"

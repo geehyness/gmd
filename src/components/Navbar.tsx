@@ -46,7 +46,8 @@ export function Navbar({ appName, siteLogoUrl, type = 'customer' }: NavbarProps)
 
     const menuItems = [
         { name: 'Home', href: '/' },
-        { name: '3D Showcase', href: '/house-viewer' },
+        { name: 'Projects', href: '/projects' },
+        //{ name: '3D Showcase', href: '/house-viewer' },
     ];
 
     return (

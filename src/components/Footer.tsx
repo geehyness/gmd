@@ -19,7 +19,7 @@ interface FooterProps {
   appName?: string;
 }
 
-export function Footer({ appName = 'Synapse Digital' }: FooterProps) {
+export function Footer({ appName = 'Godliness Dongorere' }: FooterProps) {
   // Get accent color from theme
   const [accentColor] = useToken('colors', ['accent.500']);
 

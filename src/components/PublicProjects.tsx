@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {
   Box, Flex, Heading, Text, SimpleGrid, Button, VStack, HStack, Icon,
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton,
-  useDisclosure, Tag, Link, useColorModeValue, useToken
+  useDisclosure, Tag, Link, useColorModeValue, useToken, useBreakpointValue
 } from '@chakra-ui/react';
 import { FaExternalLinkAlt, FaGithub, FaCopy } from 'react-icons/fa';
 import { FiExternalLink } from 'react-icons/fi';
@@ -12,9 +12,114 @@ import { projectsData, Project } from '@/data/projectsData';
 
 const MotionBox = motion(Box);
 
-function getScreenshotSrc(id: string) {
-  return `/projects/${id}.png`;
+function getScreenshotSrc(id: string, isMobile: boolean) {
+  const device = isMobile ? 'mobile' : 'desktop';
+  return `/projects/${id}.${device}.png`;
 }
+
+interface DeviceScreenshotProps {
+  projectId: string;
+}
+
+const DeviceScreenshot: React.FC<DeviceScreenshotProps> = ({ projectId }) => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
+  const borderColor = useColorModeValue('neutral.light.border-color', 'neutral.dark.border-color');
+  const bgColor = useColorModeValue('neutral.light.bg-card', 'neutral.dark.bg-card');
+
+  const mobileStyles = {
+    width: '150px',
+    height: '250px',
+    mx: 'auto',
+    borderRadius: '3xl',
+    overflow: 'hidden',
+    borderWidth: '3px',
+    borderColor: borderColor,
+    position: 'relative',
+    _before: {
+      content: '""',
+      position: 'absolute',
+      top: '10px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      width: '40px',
+      height: '4px',
+      bg: 'neutral.light.text-secondary',
+      borderRadius: '2px',
+      zIndex: 11,
+    },
+    _after: {
+      content: '""',
+      position: 'absolute',
+      bottom: '10px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      width: '30px',
+      height: '30px',
+      borderWidth: '2px',
+      borderColor: borderColor,
+      borderRadius: 'full',
+      zIndex: 11,
+    },
+  };
+
+  const desktopStyles = {
+    _before: {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      zIndex: 10,
+      pointerEvents: 'none',
+      bg: 'transparent',
+      borderColor: borderColor,
+      borderWidth: '2px',
+      borderRadius: 'lg',
+      borderTopRadius: '2xl',
+      borderBottomWidth: '8px',
+      _after: {
+        content: '""',
+        position: 'absolute',
+        bottom: '-8px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '50%',
+        height: '8px',
+        bg: bgColor,
+        borderBottomRadius: 'xl',
+        borderColor: borderColor,
+        borderWidth: '2px',
+        borderTopWidth: 0,
+      },
+    },
+  };
+
+  return (
+    <Box
+      width="100%"
+      height="200px"
+      bg="gray.100"
+      bgPosition="relative"
+      {...(isMobile ? { ...mobileStyles } : { ...desktopStyles })}
+    >
+      <img
+        src={getScreenshotSrc(projectId, isMobile || false)}
+        alt={`${projectId} screenshot`}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          ...(!isMobile && { borderTopRadius: '2xl', borderRadius: 'lg' })
+        }}
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.src = '/projects/placeholder.png';
+        }}
+      />
+    </Box>
+  );
+};
 
 function ProjectModal({ project, isOpen, onClose }: { project: Project; isOpen: boolean; onClose: () => void }) {
   const textPrimaryToken = useColorModeValue('neutral.light.text-primary', 'neutral.dark.text-primary');
@@ -65,28 +170,7 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project; isOpen: 
         <ModalBody pb={6}>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
             <Box>
-              <Box
-                width="100%"
-                height="250px"
-                borderRadius="lg"
-                overflow="hidden"
-                bg="gray.100"
-                position="relative"
-              >
-                <img
-                  src={getScreenshotSrc(project.id)}
-                  alt={project.screenshotAlt || `${project.name} screenshot`}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                  }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = '/projects/placeholder.png';
-                  }}
-                />
-              </Box>
+              <DeviceScreenshot projectId={project.id} />
 
               {project.tech && (
                 <Flex wrap="wrap" gap={2} mt={4}>
@@ -274,21 +358,8 @@ const PublicProjects: React.FC<{ className?: string }> = ({ className }) => {
                 height="200px"
                 position="relative"
                 overflow="hidden"
-                bg="gray.100"
               >
-                <img
-                  src={getScreenshotSrc(project.id)}
-                  alt={project.screenshotAlt || `${project.name} screenshot`}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                  }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = '/projects/placeholder.png';
-                  }}
-                />
+                <DeviceScreenshot projectId={project.id} />
               </Box>
 
               <Box p={6} flex={1} display="flex" flexDirection="column">
