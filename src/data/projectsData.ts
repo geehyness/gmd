@@ -43,9 +43,9 @@ export const projectsData: Project[] = [
         tech: ['Next.js', 'Sanity', 'TypeScript', 'Chakra UI', 'Postgres'],
         links: [
             { label: 'Customer site', url: 'https://kimmys.vercel.app/' },
-            { label: 'Admin dashboard', url: 'https://kimmys-dash.vercel.app/login', note: 'Login required' },
+            
         ],
-        credentials: { username: 'demo@caterflow.com', password: 'DemoPass123', note: 'Reset every 24h' },
+        credentials: null,
         year: 2025,
         role: 'Lead developer',
         repo: 'https://github.com/geehyness/kimmys-site/',
@@ -61,7 +61,7 @@ export const projectsData: Project[] = [
         credentials: null,
         year: 2025,
         role: 'Frontend engineer',
-        repo: 'https://github.com/yourusername/house-viewer',
+        repo: 'https://github.com/geehyness/gmd/tree/main/src/app/house-viewer',
         screenshotAlt: '3D house viewer scene with sunlight and UI',
     },
     // Add more projects here as needed
