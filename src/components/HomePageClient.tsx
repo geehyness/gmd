@@ -13,19 +13,19 @@ import { FaChevronDown, FaRocket, FaTimes, FaCog, FaArrowRight } from 'react-ico
 import { FiMail, FiPhone, FiGithub, FiLinkedin } from 'react-icons/fi';
 
 const DEFAULT_CONFIG = {
-  starCount: 50,
+  starCount: 80,
   minSize: 2,
   maxSize: 10,
   minDepth: 0.1,
   maxDepth: 50.0,
   baseSpeed: 0.000008,
-  momentumDecay: 0.8,
-  scrollSensitivity: 0.001,
+  momentumDecay: 0.5,
+  scrollSensitivity: 0.0001,
   glowIntensity: 0,
-  connectionChance: 0.3,
+  connectionChance: 0.5,
   maxConnectionDistance: 100,
   rotationSpeed: 0.001,
-  trailOpacity: 0.2, // Reduced opacity for light background
+  trailOpacity: 0.6,
   blackHole: {
     isEnabled: false,
     mass: 150,
