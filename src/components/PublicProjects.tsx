@@ -34,7 +34,6 @@ const DeviceScreenshot: React.FC<DeviceScreenshotProps> = ({ projectId }) => {
     overflow: 'hidden',
     borderWidth: '3px',
     borderColor: borderColor,
-    position: 'relative',
     _before: {
       content: '""',
       position: 'absolute',
@@ -95,12 +94,13 @@ const DeviceScreenshot: React.FC<DeviceScreenshotProps> = ({ projectId }) => {
     },
   };
 
+
   return (
     <Box
       width="100%"
       height="200px"
+      position="relative" // Correct prop for 'relative' positioning
       bg="gray.100"
-      bgPosition="relative"
       {...(isMobile ? { ...mobileStyles } : { ...desktopStyles })}
     >
       <img
@@ -119,6 +119,7 @@ const DeviceScreenshot: React.FC<DeviceScreenshotProps> = ({ projectId }) => {
       />
     </Box>
   );
+
 };
 
 function ProjectModal({ project, isOpen, onClose }: { project: Project; isOpen: boolean; onClose: () => void }) {
