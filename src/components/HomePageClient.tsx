@@ -15,21 +15,21 @@ import PublicProjects from './PublicProjects';
 
 
 const DEFAULT_CONFIG = {
-  starCount: 80,
+  starCount: 50,
   minSize: 2,
   maxSize: 10,
   minDepth: 0.1,
   maxDepth: 50.0,
   baseSpeed: 0.000008,
-  momentumDecay: 0.5,
-  scrollSensitivity: 0.002,
+  momentumDecay: 0.05,
+  scrollSensitivity: 0.005,
   glowIntensity: 0,
   connectionChance: 0.5,
-  maxConnectionDistance: 150,
+  maxConnectionDistance: 120,
   rotationSpeed: 0.001,
   trailOpacity: 0.6,
   blackHole: {
-    isEnabled: false,
+    isEnabled: true,
     mass: 150,
     gravity: 0.18,
     attractionRadius: 800,
@@ -45,7 +45,7 @@ const MotionBox = motion(Box);
 
 const isMobile = () => {
   if (typeof window === "undefined") {
-    return false; // Prevents issues on the server side (SSR frameworks like Next.js)
+    return false;
   }
   return (
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -56,13 +56,11 @@ const isMobile = () => {
 
 function hexToRgb(hex: string) {
   if (!hex) return null;
-  // If the token is already an rgba string, return parsed values
   if (hex.startsWith('rgba')) {
     const match = hex.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([0-9.]+))?\)/);
     if (!match) return null;
     return { r: Number(match[1]), g: Number(match[2]), b: Number(match[3]), a: match[4] ? Number(match[4]) : 1 };
   }
-  // Normalize #RRGGBB or #RGB
   const raw = hex.replace('#', '');
   if (raw.length === 3) {
     const r = parseInt(raw[0] + raw[0], 16);
@@ -122,7 +120,7 @@ const HomePageClient: React.FC = () => {
 
   // computed colors
   const brandGlow = useToken('colors', 'brand.200');
-  const brandGlowStrong = useToken('colors', 'brand.300');
+  const brandGlowStrong = useToken('colors', 'brand.500');
   const accentRgba = useToken('colors', 'accent.500');
   const tagTint = useToken('colors', 'brand.50');
   const canvasBg = bgPrimaryHex || '#F8FAFC'; // Always use light background
@@ -166,9 +164,9 @@ const HomePageClient: React.FC = () => {
     );
     glowGradient.addColorStop(0, rgbaFromHex(brandHex || '#6366F1', 0.9));
 
-    // Changed from dark to light colors
-    glowGradient.addColorStop(0.3, 'rgba(230, 230, 250, 0.4)'); // Light lavender
-    glowGradient.addColorStop(1, 'rgba(255, 255, 255, 0)'); // Fade to white
+    // Updated to a light blue color to complement orange
+    glowGradient.addColorStop(0.01, rgbaFromHex(accentHex || '#FF3F00', 1));
+    glowGradient.addColorStop(0.02, rgbaFromHex(accentHex || '#Ff3F00', 0));
 
     bhGlowGradientRef.current = glowGradient;
 
@@ -178,10 +176,10 @@ const HomePageClient: React.FC = () => {
         bhX, bhY, bhRadius * 1.3
       );
 
-      // Update accretion disk colors here
-      diskGradient.addColorStop(0, rgbaFromHex(accentHex || '#14B8A6', 0));
-      diskGradient.addColorStop(0.25, rgbaFromHex(accentHex || '#14B8A6', 0.4)); // Increased opacity
-      diskGradient.addColorStop(1, rgbaFromHex(accentHex || '#14B8A6', 0));
+      // This already uses the accentHex, so it will now be orange
+      diskGradient.addColorStop(0, rgbaFromHex(accentHex || '#FF3F00', 0));
+      diskGradient.addColorStop(0.25, rgbaFromHex(accentHex || '#FF3F00', 0.4));
+      diskGradient.addColorStop(1, rgbaFromHex(accentHex || '#FF3F00', 0));
 
       bhDiskGradientRef.current = diskGradient;
     } else {
@@ -423,12 +421,12 @@ const HomePageClient: React.FC = () => {
           offscreenCtx.fill();
         }
 
-        offscreenCtx.fillStyle = '#ffffffff'; // Darker black hole for contrast
+        offscreenCtx.fillStyle = '#ffffffff';
         offscreenCtx.beginPath();
         offscreenCtx.arc(bhX, bhY, bhRadius, 0, Math.PI * 2);
         offscreenCtx.fill();
 
-        offscreenCtx.strokeStyle = 'rgba(100, 116, 139, 0.25)'; // Lighter border
+        offscreenCtx.strokeStyle = '#fff'; // Lighter border
         offscreenCtx.lineWidth = 1;
         offscreenCtx.beginPath();
         offscreenCtx.arc(bhX, bhY, bhRadius * 1.1, 0, Math.PI * 2);
@@ -548,7 +546,7 @@ const HomePageClient: React.FC = () => {
     {
       company: "The Luke Commission, Sidvokodvo, eSwatini",
       position: "Systems Engineer",
-      period: "May 2023 – PRESENT",
+      period: "May 2023 – September 2025",
       achievements: [
         "Designed Oxygen Plant Dashboard (SCADA Ignition), improving product gas quality",
         "Programmed Siemens PLCs using TIA Portal and integrated Profinet slaves",
@@ -921,8 +919,19 @@ const HomePageClient: React.FC = () => {
               color={textPrimaryToken}
               textShadow={`0 6px 26px ${brandGlow}`}
             >
-              Godliness <Box as="span" color={accentRgba} display="inline-block" textShadow={`0 8px 30px ${brandGlowStrong}`}>Dongorere</Box>
-            </Heading><br />
+              Godliness
+            </Heading>
+            <Heading
+              as="h1"
+              size={{ base: "lg", md: "xl" }}
+              fontWeight="extrabold"
+              letterSpacing="tight"
+              color={textPrimaryToken}
+              textShadow={`0 6px 26px ${brandGlow}`}
+            >
+              <Box as="span" color={accentRgba} display="inline-block" textShadow={`0 8px 30px ${brandGlowStrong}`}>Dongorere</Box>
+            </Heading>
+            <br />
             <hr />
             <HStack spacing={4} mb={6} justify="center">
               <IconButton
@@ -971,7 +980,7 @@ const HomePageClient: React.FC = () => {
               />
             </HStack>
             <Text fontSize={{ base: "sm", md: "md" }} color={textSecondaryToken} mt={4}>
-              Software Developer<br />& AI/3D Solutions Specialist
+              Software Developer<br />FullStack Solutions
             </Text>
           </MotionBox>
           <MotionBox
