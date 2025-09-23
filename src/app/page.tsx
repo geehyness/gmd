@@ -48,6 +48,7 @@ async function getHomePageData(): Promise<{
       "siteSettings": *[_type == "siteSettings"][0]{ title, description, coverImage, logo }
     }
   `;
+
   // Added { next: { revalidate: 60 } } for ISR
   const data = await client.fetch(query, {}, { next: { revalidate: 60 } });
 
