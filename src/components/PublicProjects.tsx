@@ -326,7 +326,7 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project; isOpen: 
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="4xl" isCentered>
-      <ModalOverlay bg="blackAlpha.600" backdropFilter="blur(10px)" />
+      <ModalOverlay bg="#ffffff99" backdropFilter="blur(10px)" />
       <ModalContent
         {...glassCardProps}
         mx={4}
