@@ -62,7 +62,7 @@ export function Footer({ appName = 'Godliness Dongorere' }: FooterProps) {
             />
           </HStack>
           <Text color="white" mb={6} textAlign="center">
-            Software Developer & AI/3D Solutions Specialist
+            Software Developer | FullStack Solutions
           </Text>
         </Flex>
 

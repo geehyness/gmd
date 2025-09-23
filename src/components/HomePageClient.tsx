@@ -15,11 +15,11 @@ import PublicProjects from './PublicProjects';
 
 
 const DEFAULT_CONFIG = {
-  starCount: 50,
+  starCount: 80,
   minSize: 2,
-  maxSize: 10,
+  maxSize: 12,
   minDepth: 0.1,
-  maxDepth: 50.0,
+  maxDepth: 70.0,
   baseSpeed: 0.000008,
   momentumDecay: 0.05,
   scrollSensitivity: 0.005,
@@ -27,7 +27,7 @@ const DEFAULT_CONFIG = {
   connectionChance: 0.5,
   maxConnectionDistance: 120,
   rotationSpeed: 0.001,
-  trailOpacity: 0.6,
+  trailOpacity: 0.95,
   blackHole: {
     isEnabled: true,
     mass: 150,
