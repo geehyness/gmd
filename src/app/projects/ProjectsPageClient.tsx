@@ -440,7 +440,7 @@ const ProjectsPageClient: React.FC<ProjectsPageClientProps> = ({ projects }) => 
                         fontWeight="extrabold"
                         letterSpacing="tight"
                     >
-                        Our Projects
+                        Projects
                     </Heading>
                     <Text
                         mt={4}
