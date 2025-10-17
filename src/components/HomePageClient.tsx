@@ -30,10 +30,10 @@ const DEFAULT_CONFIG = {
   trailOpacity: 0.95,
   blackHole: {
     isEnabled: true,
-    mass: 150,
-    gravity: 0.18,
+    mass: 140,
+    gravity: 0.003,
     attractionRadius: 800,
-    spin: 1,
+    spin: 4,
     accretionDisk: true,
     escapeMomentumThreshold: 20,
   }
