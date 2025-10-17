@@ -31,7 +31,7 @@ const DEFAULT_CONFIG = {
   blackHole: {
     isEnabled: true,
     mass: 140,
-    gravity: 0.003,
+    gravity: 0.002,
     attractionRadius: 800,
     spin: 4,
     accretionDisk: true,
