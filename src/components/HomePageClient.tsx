@@ -1030,6 +1030,27 @@ const HomePageClient: React.FC = () => {
           })}
         </SimpleGrid>
 
+        {/* Public Projects Section (new) */}
+        <Box mb={20} id="projects">
+          <PublicProjects />
+        </Box>
+
+        <Box mb={20} {...glassCardProps} p={8} borderRadius="2xl">
+          <VStack spacing={2} mb={6} textAlign="center">
+            <Text color={accentRgba} fontWeight="bold">INTERESTS</Text>
+            <Heading as="h2" size="xl" color={textPrimaryToken}>Personal Interests</Heading>
+          </VStack>
+
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
+            {interests.map((interest, index) => (
+              <HStack key={index} align="flex-start" spacing={3}>
+                <Icon as={FaRocket} color={accentRgba} mt={1} />
+                <Text color={textPrimaryToken} fontSize="lg">{interest}</Text>
+              </HStack>
+            ))}
+          </SimpleGrid>
+        </Box>
+
         <Box mb={20} {...glassCardProps} p={8} borderRadius="2xl">
           <VStack spacing={2} mb={8} textAlign="center">
             <Text color={accentRgba} fontWeight="bold">SKILLS & EXPERTISE</Text>
@@ -1148,26 +1169,7 @@ const HomePageClient: React.FC = () => {
           </SimpleGrid>
         </Box>
 
-        {/* Public Projects Section (new) */}
-        <Box mb={20} id="projects">
-          <PublicProjects />
-        </Box>
-
-        <Box mb={20} {...glassCardProps} p={8} borderRadius="2xl">
-          <VStack spacing={2} mb={6} textAlign="center">
-            <Text color={accentRgba} fontWeight="bold">INTERESTS</Text>
-            <Heading as="h2" size="xl" color={textPrimaryToken}>Personal Interests</Heading>
-          </VStack>
-
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
-            {interests.map((interest, index) => (
-              <HStack key={index} align="flex-start" spacing={3}>
-                <Icon as={FaRocket} color={accentRgba} mt={1} />
-                <Text color={textPrimaryToken} fontSize="lg">{interest}</Text>
-              </HStack>
-            ))}
-          </SimpleGrid>
-        </Box>
+        
 
         <Flex
           justify="center"
