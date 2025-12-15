@@ -58,6 +58,13 @@ function generatePlanetColor(): string {
 	return colors[Math.floor(Math.random() * colors.length)];
 }
 
+// Add interface for independent planets
+interface IndependentPlanet extends Planet {
+	originalRadius: number;
+	life: number;
+	parentStarId: number | null;
+}
+
 const EnhancedStarfield: React.FC = () => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const { config, interactiveCircle, setInteractiveCircle } = useStarfield();
@@ -73,6 +80,7 @@ const EnhancedStarfield: React.FC = () => {
 
 	// Refs for animation
 	const starsRef = useRef<Star[]>([]);
+	const independentPlanetsRef = useRef<IndependentPlanet[]>([]); // New: track planets independent of stars
 	const animationFrameId = useRef<number | null>(null);
 	const offscreenCanvasRef = useRef<HTMLCanvasElement | null>(null);
 	const offscreenCtxRef = useRef<CanvasRenderingContext2D | null>(null);
@@ -92,7 +100,8 @@ const EnhancedStarfield: React.FC = () => {
 				y: Math.random() * canvas.height,
 				z: Math.random() * (config.maxDepth - config.minDepth) + config.minDepth,
 				size: Math.random() * (config.maxSize - config.minSize) + config.minSize,
-				type: Math.random() > 0.66 ? 'cross' : Math.random() > 0.33 ? 'star' : 'circle',
+				originalSize: Math.random() * (config.maxSize - config.minSize) + config.minSize, // Add originalSize
+				type: Math.random() > 0.66 ? 'circle' : Math.random() > 0.33 ? 'circle' : 'circle',
 				color: generateStarColor(),
 				rotation: Math.random() * Math.PI * 2,
 				vx: 0,
@@ -100,7 +109,9 @@ const EnhancedStarfield: React.FC = () => {
 				spinFactor: 0.5 + Math.random() * 0.5,
 				hasPlanets: Math.random() < config.planetChance,
 				planets: [],
-				glowIntensity: 0.3 + Math.random() * 0.7
+				glowIntensity: 0.3 + Math.random() * 0.7,
+				consumed: false, // Add consumed state
+				life: 1.0 // Add life for fading effect
 			};
 
 			// Add planets if star has planets
@@ -111,11 +122,13 @@ const EnhancedStarfield: React.FC = () => {
 						x: 0,
 						y: 0,
 						radius: star.size * (0.3 + Math.random() * 0.4),
+						originalRadius: star.size * (0.3 + Math.random() * 0.4), // Store original radius
 						orbitRadius: star.size * (3 + Math.random() * 4),
 						orbitSpeed: 0.001 + Math.random() * 0.003,
 						color: generatePlanetColor(),
 						angle: Math.random() * Math.PI * 2,
-						parentStarId: i
+						parentStarId: i,
+						independent: false // Track if planet is independent
 					});
 				}
 			}
@@ -124,6 +137,7 @@ const EnhancedStarfield: React.FC = () => {
 		}
 
 		starsRef.current = stars;
+		independentPlanetsRef.current = []; // Clear independent planets on init
 	}, []);
 
 	// Handle pointer events
@@ -226,56 +240,143 @@ const EnhancedStarfield: React.FC = () => {
 		return circle;
 	}, []);
 
+	// Make planets independent when star is consumed
+	const releasePlanetsFromStar = useCallback((starId: number) => {
+		const stars = starsRef.current;
+		const star = stars.find(s => s.id === starId);
+
+		if (!star || !star.hasPlanets) return;
+
+		star.planets.forEach(planet => {
+			// Create independent planet
+			const independentPlanet: IndependentPlanet = {
+				...planet,
+				originalRadius: planet.radius,
+				life: 1.0,
+				parentStarId: starId
+			};
+
+			independentPlanetsRef.current.push(independentPlanet);
+		});
+
+		// Clear planets from star
+		star.planets = [];
+		star.hasPlanets = false;
+	}, []);
+
+	// Update independent planets
+	const updateIndependentPlanets = useCallback((canvas: HTMLCanvasElement) => {
+		const bhConfig = configRef.current.blackHole;
+		const bhX = canvas.width / 2;
+		const bhY = canvas.height / 2;
+
+		// Update existing independent planets
+		independentPlanetsRef.current = independentPlanetsRef.current.filter(planet => {
+			// Calculate distance to black hole
+			const dx = bhX - planet.x;
+			const dy = bhY - planet.y;
+			const distance = Math.sqrt(dx * dx + dy * dy);
+
+			// Apply gravity toward black hole
+			const gravityForce = bhConfig.gravity * 2; // Stronger gravity for planets
+			const dirX = dx / distance;
+			const dirY = dy / distance;
+
+			// Move toward black hole
+			planet.x += dirX * gravityForce * 2;
+			planet.y += dirY * gravityForce * 2;
+
+			// Shrink planet as it gets closer to black hole
+			const shrinkDistance = bhConfig.mass * 3;
+			if (distance < shrinkDistance) {
+				// Shrink proportionally to distance
+				const shrinkFactor = distance / shrinkDistance;
+				planet.radius = planet.originalRadius * shrinkFactor * planet.life;
+
+				// Fade out
+				planet.life -= 0.01;
+			}
+
+			// Remove if too small or dead
+			return planet.radius > 0.5 && planet.life > 0;
+		});
+	}, []);
+
 	// Update stars and planets
 	const updateStars = useCallback((canvas: HTMLCanvasElement) => {
 		const config = configRef.current;
 		const stars = starsRef.current;
 		const momentum = momentumRef.current;
+		const bhConfig = config.blackHole;
+		const bhX = canvas.width / 2;
+		const bhY = canvas.height / 2;
 
 		stars.forEach(star => {
-			const bhConfig = config.blackHole;
+			// Calculate distance to black hole
+			const dx = bhX - star.x;
+			const dy = bhY - star.y;
+			const distanceSq = dx * dx + dy * dy;
+			const distance = Math.sqrt(distanceSq);
+			const bhMassSq = bhConfig.mass * bhConfig.mass;
+			const bhAttractionRadiusSq = bhConfig.attractionRadius * bhConfig.attractionRadius;
 
-			// Apply black hole gravity
-			if (bhConfig.isEnabled) {
-				const bhX = canvas.width / 2;
-				const bhY = canvas.height / 2;
-				const dx = bhX - star.x;
-				const dy = bhY - star.y;
-				const distanceSq = dx * dx + dy * dy;
-				const bhMassSq = bhConfig.mass * bhConfig.mass;
-				const bhAttractionRadiusSq = bhConfig.attractionRadius * bhConfig.attractionRadius;
+			// If star is already being consumed
+			if (star.consumed) {
+				// Continue shrinking
+				star.life -= 0.02;
+				star.size = star.originalSize * star.life;
 
-				// Handle stars getting sucked into black hole
-				if (distanceSq < bhMassSq) {
-					if (Math.random() < 0.1) {
-						// Respawn star at edge
-						const angle = Math.random() * Math.PI * 2;
-						const distance = Math.random() * canvas.width * 0.3 + canvas.width * 0.2;
-						star.x = bhX + Math.cos(angle) * distance;
-						star.y = bhY + Math.sin(angle) * distance;
-						star.vx = 0;
-						star.vy = 0;
-					}
+				// Move toward black hole faster
+				const dirX = dx / distance;
+				const dirY = dy / distance;
+				star.x += dirX * bhConfig.gravity * 3;
+				star.y += dirY * bhConfig.gravity * 3;
+
+				// Release planets if not already done
+				if (star.hasPlanets && star.life < 0.8) {
+					releasePlanetsFromStar(star.id);
 				}
 
-				// Apply gravity within attraction radius
-				if (distanceSq < bhAttractionRadiusSq) {
-					const distance = Math.sqrt(distanceSq);
-					const dirX = dx / distance;
-					const dirY = dy / distance;
-
-					const sizeInfluenceFactor = star.size / config.maxSize;
-					const gravityInfluence = (1 - (distance / bhConfig.attractionRadius)) * sizeInfluenceFactor;
-
-					const gravityForce = gravityInfluence * bhConfig.gravity;
-					star.vx += dirX * gravityForce;
-					star.vy += dirY * gravityForce;
-
-					// Apply orbital spin
-					const spinForce = gravityForce * bhConfig.spin * star.spinFactor;
-					star.vx += -dirY * spinForce;
-					star.vy += dirX * spinForce;
+				// Remove star if too small
+				if (star.life <= 0 || star.size < 0.5) {
+					// Respawn star at edge
+					const angle = Math.random() * Math.PI * 2;
+					const respawnDistance = Math.random() * canvas.width * 0.3 + canvas.width * 0.2;
+					star.x = bhX + Math.cos(angle) * respawnDistance;
+					star.y = bhY + Math.sin(angle) * respawnDistance;
+					star.size = star.originalSize;
+					star.life = 1.0;
+					star.consumed = false;
+					star.vx = 0;
+					star.vy = 0;
 				}
+
+				return;
+			}
+
+			// Apply black hole gravity if within attraction radius
+			if (distanceSq < bhAttractionRadiusSq) {
+				const dirX = dx / distance;
+				const dirY = dy / distance;
+
+				const sizeInfluenceFactor = star.size / config.maxSize;
+				const gravityInfluence = (1 - (distance / bhConfig.attractionRadius)) * sizeInfluenceFactor;
+
+				const gravityForce = gravityInfluence * bhConfig.gravity;
+				star.vx += dirX * gravityForce;
+				star.vy += dirY * gravityForce;
+
+				// Apply orbital spin
+				const spinForce = gravityForce * bhConfig.spin * star.spinFactor;
+				star.vx += -dirY * spinForce;
+				star.vy += dirX * spinForce;
+			}
+
+			// Check if star should start being consumed (close to event horizon)
+			const eventHorizonRadius = bhConfig.mass * 1.5;
+			if (distance < eventHorizonRadius) {
+				star.consumed = true;
+				return;
 			}
 
 			// Apply base movement with momentum
@@ -290,7 +391,7 @@ const EnhancedStarfield: React.FC = () => {
 			star.y += star.vy;
 			star.rotation += config.rotationSpeed;
 
-			// Update planet positions
+			// Update planet positions (only if star is not consumed)
 			star.planets.forEach(planet => {
 				planet.angle += planet.orbitSpeed;
 				planet.x = star.x + Math.cos(planet.angle) * planet.orbitRadius;
@@ -322,7 +423,10 @@ const EnhancedStarfield: React.FC = () => {
 				star.vy = 0;
 			}
 		});
-	}, []);
+
+		// Update independent planets
+		updateIndependentPlanets(canvas);
+	}, [releasePlanetsFromStar, updateIndependentPlanets]);
 
 	// Draw black hole with enhanced visuals
 	const drawBlackHole = useCallback((ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, time: number) => {
@@ -401,18 +505,25 @@ const EnhancedStarfield: React.FC = () => {
 		const stars = starsRef.current;
 
 		stars.forEach(star => {
+			// Skip drawing if star is consumed and very small
+			if (star.consumed && star.size < 1) return;
+
 			ctx.save();
 			ctx.translate(star.x, star.y);
 			ctx.rotate(star.rotation);
 
-			// Draw star glow
+			// Draw star glow (reduced for consumed stars)
 			if (config.glowIntensity > 0.01 && star.glowIntensity > 0) {
+				const glowIntensity = star.consumed ? star.glowIntensity * star.life : star.glowIntensity;
 				ctx.shadowColor = star.color;
-				ctx.shadowBlur = star.size * config.glowIntensity * star.glowIntensity * 3;
+				ctx.shadowBlur = star.size * config.glowIntensity * glowIntensity * 3;
 			}
 
-			// Draw star based on type
+			// Draw star based on type with fading for consumed stars
+			const alpha = star.consumed ? star.life : 1;
+			ctx.globalAlpha = alpha;
 			ctx.fillStyle = star.color;
+
 			if (star.type === 'cross') {
 				const armLength = star.size;
 				const armWidth = star.size * 0.25;
@@ -441,35 +552,58 @@ const EnhancedStarfield: React.FC = () => {
 			}
 
 			ctx.restore();
+			ctx.globalAlpha = 1;
 
-			// Draw planets
-			star.planets.forEach(planet => {
-				ctx.save();
-				ctx.translate(planet.x, planet.y);
+			// Draw planets (only if star is not consumed)
+			if (!star.consumed) {
+				star.planets.forEach(planet => {
+					ctx.save();
+					ctx.translate(planet.x, planet.y);
 
-				// Planet with slight glow
-				ctx.shadowColor = planet.color;
-				ctx.shadowBlur = 5;
-				ctx.fillStyle = planet.color;
-				ctx.beginPath();
-				ctx.arc(0, 0, planet.radius, 0, Math.PI * 2);
-				ctx.fill();
+					// Planet with slight glow
+					ctx.shadowColor = planet.color;
+					ctx.shadowBlur = 5;
+					ctx.fillStyle = planet.color;
+					ctx.beginPath();
+					ctx.arc(0, 0, planet.radius, 0, Math.PI * 2);
+					ctx.fill();
 
-				// Planet orbit line (faint)
-				ctx.restore();
-				ctx.save();
-				ctx.translate(star.x, star.y);
-				ctx.strokeStyle = rgbaFromHex('#FFFFFF', 0.1);
-				ctx.lineWidth = 0.5;
-				ctx.beginPath();
-				ctx.arc(0, 0, planet.orbitRadius, 0, Math.PI * 2);
-				ctx.stroke();
-				ctx.restore();
-			});
+					// Planet orbit line (faint)
+					ctx.restore();
+					ctx.save();
+					ctx.translate(star.x, star.y);
+					ctx.strokeStyle = rgbaFromHex('#FFFFFF', 0.1);
+					ctx.lineWidth = 0.5;
+					ctx.beginPath();
+					ctx.arc(0, 0, planet.orbitRadius, 0, Math.PI * 2);
+					ctx.stroke();
+					ctx.restore();
+				});
+			}
 		});
 
-		// Reset shadow
+		// Draw independent planets
+		independentPlanetsRef.current.forEach(planet => {
+			ctx.save();
+			ctx.translate(planet.x, planet.y);
+
+			// Fade out as life decreases
+			ctx.globalAlpha = planet.life;
+
+			// Planet with glow
+			ctx.shadowColor = planet.color;
+			ctx.shadowBlur = 5 * planet.life;
+			ctx.fillStyle = planet.color;
+			ctx.beginPath();
+			ctx.arc(0, 0, planet.radius, 0, Math.PI * 2);
+			ctx.fill();
+
+			ctx.restore();
+		});
+
+		// Reset shadow and alpha
 		ctx.shadowBlur = 0;
+		ctx.globalAlpha = 1;
 	}, []);
 
 	// Draw connections between stars
@@ -481,6 +615,8 @@ const EnhancedStarfield: React.FC = () => {
 
 		// Build spatial grid
 		stars.forEach(star => {
+			if (star.consumed) return; // Skip consumed stars
+
 			const gridX = Math.floor(star.x / gridSize);
 			const gridY = Math.floor(star.y / gridSize);
 			const key = `${gridX},${gridY}`;
@@ -490,6 +626,8 @@ const EnhancedStarfield: React.FC = () => {
 
 		// Draw connections
 		stars.forEach(star => {
+			if (star.consumed) return; // Skip consumed stars
+
 			const gridX = Math.floor(star.x / gridSize);
 			const gridY = Math.floor(star.y / gridSize);
 
@@ -569,7 +707,6 @@ const EnhancedStarfield: React.FC = () => {
 		timeRef.current += 0.016; // ~60fps
 
 		// Clear with trail effect
-		// offscreenCtx.fillStyle = `rgba(248, 250, 252, ${configRef.current.trailOpacity})`;
 		offscreenCtx.fillStyle = `rgba(31, 31, 31, ${configRef.current.trailOpacity})`;
 		offscreenCtx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -586,7 +723,7 @@ const EnhancedStarfield: React.FC = () => {
 			}
 		}
 
-		// Update stars
+		// Update stars and planets
 		updateStars(canvas);
 
 		// Draw everything to offscreen canvas
