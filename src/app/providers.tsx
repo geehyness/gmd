@@ -3,9 +3,10 @@
 
 import { ChakraProvider } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
-import themes from './theme/theme' // Import your custom theme
-import { PageTransitionProvider } from '@/components/PageTransitionProvider' // Import PageTransitionProvider
-//import { AuthProvider } from '@/context/AuthContext'; // Import AuthProvider
+import themes from '@/app/theme/theme'
+import { PageTransitionProvider } from '@/components/PageTransitionProvider'
+import { StarfieldProvider } from '@/contexts/StarfieldContext'
+import EnhancedStarfield from '@/components/EnhancedStarfield'
 
 // Dynamically import ThemeProvider from next-themes with ssr: false
 const ThemeProvider = dynamic(
@@ -22,15 +23,16 @@ export function Providers({ children }: ProvidersProps) {
     <ChakraProvider theme={themes}>
       <ThemeProvider
         attribute="class"
-        defaultTheme="light" // Ensure light mode is default
+        defaultTheme="light"
         enableSystem={false}
         disableTransitionOnChange
       >
-        <PageTransitionProvider>
-{/** <AuthProvider>*/}
+        <StarfieldProvider>
+          <EnhancedStarfield />
+          <PageTransitionProvider>
             {children}
-{/** </AuthProvider>*/}
-        </PageTransitionProvider>
+          </PageTransitionProvider>
+        </StarfieldProvider>
       </ThemeProvider>
     </ChakraProvider>
   )

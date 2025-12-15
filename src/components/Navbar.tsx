@@ -27,21 +27,20 @@ export function Navbar({ appName, siteLogoUrl, type = 'customer' }: NavbarProps)
         'neutral.light.text-primary'
     ]);
 
-    // Glass card style matching homepage
-    const glassCardStyle = {
-        bg: bgCardToken,
-        backdropFilter: 'blur(12px) saturate(160%)',
-        border: '1px solid',
-        borderColor: borderToken,
-        boxShadow: 'md',
-        borderRadius: 'xl',
-        transition: 'all 0.25s ease-in-out',
-    };
-
     // computed colors
     const brandGlow = useToken('colors', 'brand.200');
     const brandGlowStrong = useToken('colors', 'brand.300');
     const accentRgba = useToken('colors', 'accent.500');
+
+    // src/components/Navbar.tsx - Updated excerpt
+    const glassCardStyle = {
+        bg: 'rgba(31, 31, 31, 0.85)',
+        backdropFilter: 'blur(12px) saturate(160%)',
+        border: '1px solid',
+        borderColor: 'rgba(229, 229, 229, 0.8)',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.08)',
+        borderRadius: 'xl',
+    };
 
 
     const menuItems = [
@@ -51,6 +50,7 @@ export function Navbar({ appName, siteLogoUrl, type = 'customer' }: NavbarProps)
     ];
 
     return (
+        // Apply to main Flex component
         <Flex
             as="nav"
             position="fixed"
@@ -145,7 +145,7 @@ export function Navbar({ appName, siteLogoUrl, type = 'customer' }: NavbarProps)
                         left: '12px',
                         right: '12px',
                         zIndex: 40,
-                        backgroundColor: bgCardToken,
+                        backgroundColor: '#333',
                         border: `1px solid ${borderToken}`,
                         padding: '1rem',
                         backdropFilter: 'blur(12px) saturate(160%)',

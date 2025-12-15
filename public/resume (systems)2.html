@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Godliness Dongorere - Systems Support Specialist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* --- ENHANCED PRINT OPTIMIZATION --- */
+        @page {
+            size: A4 portrait;
+            margin: 15mm 15mm 15mm 15mm;
+        }
+        
+        @media print {
+            /* Hide animation */
+            #particles-container { display: none !important; }
+            
+            /* STRATEGIC BREAK CONTROL FOR DIFFERENT EXPERIENCES */
+            /* Each experience item can break individually */
+            .experience-item {
+                page-break-inside: auto;
+                break-inside: auto;
+                margin-bottom: 8mm;
+                padding-top: 2mm;
+            }
+            
+            /* First experience shouldn't have top border */
+            .experience-item:first-child {
+                padding-top: 0;
+            }
+            
+            /* Keep job header together (title + company + dates) */
+            .job-title {
+                page-break-after: avoid;
+                break-after: avoid-page;
+            }
+            
+            .company-name {
+                page-break-before: avoid;
+                break-before: avoid-page;
+            }
+            
+            /* Allow bullet points to break individually within an experience */
+            .experience-item ul {
+                page-break-inside: auto;
+                break-inside: auto;
+            }
+            
+            .experience-item li {
+                page-break-inside: auto;
+                break-inside: auto;
+            }
+            
+            /* Keep description with at least one bullet */
+            .experience-item > p {
+                page-break-before: avoid;
+                break-before: avoid-page;
+            }
+            
+            /* SKILLS GRID - KEEP TOGETHER AS COLUMNS */
+            .skills-grid {
+                page-break-inside: avoid;
+                break-inside: avoid-page;
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                justify-content: space-between !important;
+                gap: 5mm !important;
+                margin-top: 3mm !important;
+            }
+            
+            .skill-box {
+                page-break-inside: avoid;
+                break-inside: avoid-page;
+                flex: 1 !important;
+                min-width: 0 !important;
+                background-color: #fff;
+                padding: 4mm;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            }
+            
+            /* Keep reference items together */
+            .reference-item {
+                page-break-inside: avoid;
+                break-inside: avoid-page;
+            }
+            
+            /* Keep project items together */
+            .project-item {
+                page-break-inside: avoid;
+                break-inside: avoid-page;
+            }
+            
+            /* Section headings should avoid breaks */
+            .section h2 {
+                page-break-after: avoid;
+                break-after: avoid-page;
+            }
+            
+            /* Education section formatting */
+            .education-item {
+                page-break-inside: avoid;
+                break-inside: avoid-page;
+            }
+            
+            /* Print styling */
+            body { 
+                color: #000 !important; 
+                background-color: #fff !important; 
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            a { 
+                color: #000 !important; 
+                text-decoration: underline !important; 
+            }
+            
+            /* Ensure content fits within printable area */
+            body > *:not(script) {
+                max-width: 180mm;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    
+        /* --- BASE STYLES --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.4;
+            color: #292929;
+            background-color: #f9f9f9;
+            font-weight: 500;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 5mm 10mm;
+            box-sizing: border-box;
+        }
+    
+        /* --- BACKGROUND PARTICLE STYLES (For Screen Only) --- */
+        #particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+    
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: #00A36C;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+    
+        .line {
+            position: absolute;
+            height: 0.2px;
+            background-color: #00A36C;
+            opacity: 0.08;
+            transform-origin: 0 50%;
+        }
+    
+        /* --- RESUME STRUCTURE --- */
+        .header {
+            text-align: center;
+            margin-bottom: 8mm;
+            padding-bottom: 4mm;
+            border-bottom: 1px solid #00A36C;
+        }
+    
+        .header h1 {
+            font-size: 2.2rem;
+            margin: 0 0 2mm 0;
+            color: #102E4A;
+        }
+    
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin: 2mm 0 4mm;
+        }
+    
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5mm;
+            font-size: 0.9rem;
+            margin-bottom: 2mm;
+        }
+    
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+            white-space: nowrap;
+        }
+    
+        .contact-info a {
+            color: #00A36C;
+            text-decoration: none;
+        }
+    
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+    
+        .summary {
+            margin: 5mm 0 6mm;
+            font-style: italic;
+            color: #292929;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+    
+        .section {
+            margin-bottom: 6mm;
+            padding-bottom: 5mm;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+        }
+    
+        .section:last-child {
+            border-bottom: none;
+        }
+    
+        .section h2 {
+            font-size: 1.5rem;
+            color: #00A36C;
+            border-bottom: 2px solid #00A36C;
+            padding-bottom: 2mm;
+            margin: 0 0 4mm 0;
+        }
+    
+        /* --- EXPERIENCE --- */
+        .experience-item {
+            margin-bottom: 8mm;
+            position: relative;
+        }
+    
+        .job-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #102E4A;
+            margin-bottom: 1mm;
+            margin-top: 5mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+    
+        .company-name {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-bottom: 2mm;
+        }
+    
+        .dates {
+            font-size: 0.9rem;
+            color: #95a5a6;
+            white-space: nowrap;
+            margin-left: 5mm;
+        }
+    
+        .experience-item p {
+            margin: 2mm 0 3mm;
+            font-size: 0.95rem;
+        }
+    
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 2mm 0;
+        }
+    
+        li {
+            margin-bottom: 2mm;
+            display: flex;
+            align-items: flex-start;
+            gap: 3mm;
+            font-size: 0.9rem;
+            line-height: 1.3;
+        }
+    
+        li .fas, li .fab {
+            color: #00A36C;
+            min-width: 16px;
+            margin-top: 1px;
+        }
+    
+        /* --- SKILLS (COLUMNS PRESERVED) --- */
+        .skills-grid {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            gap: 5mm;
+            margin-top: 3mm;
+        }
+    
+        .skill-box {
+            flex: 1;
+            min-width: 0;
+            background-color: #fff;
+            padding: 4mm;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+    
+        .skill-box h3 {
+            margin: 0 0 3mm 0;
+            color: #00A36C;
+            font-size: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 2mm;
+        }
+    
+        .skill-box ul {
+            margin: 0;
+        }
+    
+        .skill-box li {
+            margin-bottom: 2mm;
+            font-size: 0.9rem;
+        }
+    
+        .technical-skills {
+            margin: 4mm 0 6mm;
+        }
+    
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3mm;
+            margin-top: 3mm;
+        }
+    
+        .skill-pill {
+            background-color: #00A36C;
+            color: white;
+            padding: 1mm 3mm;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+    
+        /* --- PROJECTS --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 5mm;
+            margin-top: 3mm;
+        }
+    
+        .project-item {
+            background-color: #fff;
+            padding: 3mm;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+    
+        .project-item h3 {
+            margin: 0 0 2mm 0;
+            color: #00A36C;
+            font-size: 1rem;
+        }
+    
+        .project-item p {
+            font-size: 0.85rem;
+            color: #292929;
+            margin: 0;
+            line-height: 1.3;
+        }
+    
+        /* --- REFERENCES SECTION --- */
+        .references-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 6mm;
+            margin-top: 4mm;
+        }
+    
+        .reference-item {
+            background-color: #fff;
+            padding: 4mm;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            font-size: 0.9rem;
+        }
+    
+        .reference-item h3 {
+            margin: 0 0 2mm 0;
+            color: #102E4A;
+            font-size: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 2mm;
+        }
+    
+        .reference-item p {
+            margin: 1mm 0;
+            line-height: 1.3;
+        }
+    
+        .reference-item hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 2mm 0;
+        }
+    
+        /* --- EDUCATION --- */
+        .education-item {
+            margin-bottom: 6mm;
+        }
+    
+        /* --- BEYOND WORK --- */
+        .beyond-work {
+            text-align: center;
+            font-style: normal;
+            font-size: 0.9rem;
+            color: #292929;
+            margin-top: 6mm;
+            padding: 4mm;
+            background-color: rgba(0, 163, 108, 0.05);
+            border-radius: 4px;
+            line-height: 1.4;
+        }
+    
+        /* --- RESPONSIVE --- */
+        @media (max-width: 210mm) {
+            body {
+                padding: 4mm 6mm;
+            }
+            
+            .contact-info {
+                gap: 3mm;
+                font-size: 0.85rem;
+            }
+            
+            /* On very narrow screens, stack skill boxes */
+            @media (max-width: 140mm) {
+                .skills-grid {
+                    flex-wrap: wrap;
+                }
+                
+                .skill-box {
+                    flex: 1 0 calc(50% - 2.5mm);
+                    min-width: 120px;
+                }
+            }
+            
+            /* On mobile screens, single column */
+            @media (max-width: 100mm) {
+                .skills-grid {
+                    flex-direction: column;
+                }
+                
+                .skill-box {
+                    width: 100%;
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particle animation will be hidden in print -->
+    <div id="particles-container"></div>
+
+    <div class="header">
+        <h1>Godliness Dongorere</h1>
+        <p>Systems Support Specialist & Software Developer</p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+268 7934 2380</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span><a href="mailto:gdongorere@gmail.com">gdongorere@gmail.com</a></span>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-linkedin"></i>
+                <span><a href="https://linkedin.com/in/gdongorere" target="_blank">linkedin.com/in/gdongorere</a></span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-globe"></i>
+                <span><a href="https://godliness.vercel.app" target="_blank">godliness.vercel.app</a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="summary">
+        <p>Proactive problem-solver with expertise in maintaining mission-critical systems, providing comprehensive ICT support, and developing solutions that enhance operational efficiency. Skilled in software, hardware, and network troubleshooting with a proven ability to minimize downtime and support end-users.</p>
+    </div>
+
+    <div class="section">
+        <h2>Experience</h2>
+        <div class="experience-item">
+            <div class="job-title">Freelance Full-Stack Developer <span class="dates">January 2025 - Present</span></div>
+            <p>Helping small businesses build tools that make their work easier. I recently worked with restaurants and retail shops, creating custom systems that handle their specific needs without the big software price tag.</p>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Built a multi-restaurant POS system that lets different businesses run their operations from one platform.</li>
+                <li><i class="fas fa-check-circle"></i> Created a stock management system that helped a shop owner track inventory without spreadsheets.</li>
+                <li><i class="fas fa-check-circle"></i> Worked directly with business owners to understand what they actually need, not just what they ask for.</li>
+            </ul>
+        </div>
+        <div class="experience-item">
+            <div class="job-title">Systems Engineer <span class="dates">May 2023 - September 2025</span></div>
+            <div class="company-name">The Luke Commission</div>
+            <p>Working on everything from hospital software to oxygen plant controls—wherever technology can help people get better care.</p>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Designed and manage an Oxygen Plant Dashboard (SCADA Ignition), improving product gas quality through intuitive data visualization.</li>
+                <li><i class="fas fa-check-circle"></i> Programmed Siemens PLCs using TIA Portal and integrated Profinet slaves for seamless automation.</li>
+                <li><i class="fas fa-check-circle"></i> Debugged and resolved hardware and software issues, ensuring minimal downtime for critical systems.</li>
+                <li><i class="fas fa-check-circle"></i> Provided comprehensive ICT support, enhancing operational efficiency for staff.</li>
+                <li><i class="fas fa-check-circle"></i> Created custom 3D-printed solutions (camera mounts, orthoses) and replacement parts for broken equipment.</li>
+            </ul>
+        </div>
+        <div class="experience-item">
+            <div class="job-title">Technical Assistant Intern <span class="dates">March 2022 - December 2022</span></div>
+            <div class="company-name">Ka-Zakhali Private School</div>
+            <p>Provided ICT support and developed systems to improve administrative efficiency.</p>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Developed a custom reporting system for school reports, improving data accuracy and accessibility.</li>
+                <li><i class="fas fa-check-circle"></i> Provided ICT support, troubleshooting hardware and software issues for staff and students.</li>
+                <li><i class="fas fa-check-circle"></i> Taught Computer Application Technology to Grade 9-12 students, fostering digital literacy.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Skills</h2>
+        <div class="technical-skills">
+            <div class="skills-list">
+                <span class="skill-pill">C++</span>
+                <span class="skill-pill">ExpressJS</span>
+                <span class="skill-pill">Git</span>
+                <span class="skill-pill">Node.js</span>
+                <span class="skill-pill">Data analysis</span>
+                <span class="skill-pill">AI-driven problem-solving</span>
+                <span class="skill-pill">Process optimization</span>
+                <span class="skill-pill">3D modeling</span>
+                <span class="skill-pill">Prototyping</span>
+                <span class="skill-pill">3D visualization tools</span>
+                <span class="skill-pill">Siemens PLC programming</span>
+                <span class="skill-pill">Profinet integration</span>
+                <span class="skill-pill">Algorithms</span>
+                <span class="skill-pill">Data structures</span>
+                <span class="skill-pill">Peer programming</span>
+            </div>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-box">
+                <h3><i class="fas fa-server"></i> Systems & Networking</h3>
+                <ul>
+                    <li><i class="fas fa-fw fa-cogs"></i> System Maintenance</li>
+                    <li><i class="fas fa-fw fa-tachometer-alt"></i> SCADA Ignition</li>
+                    <li><i class="fas fa-fw fa-network-wired"></i> LAN/WAN, VPNs</li>
+                    <li><i class="fas fa-fw fa-plug"></i> Profinet</li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <h3><i class="fas fa-laptop-code"></i> Software Development</h3>
+                <ul>
+                    <li><i class="fab fa-fw fa-java"></i> Java</li>
+                    <li><i class="fab fa-fw fa-python"></i> Python</li>
+                    <li><i class="fab fa-fw fa-js-square"></i> JavaScript</li>
+                    <li><i class="fab fa-fw fa-react"></i> Next.js, React</li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <h3><i class="fas fa-cube"></i> Hardware & Solutions</h3>
+                <ul>
+                    <li><i class="fas fa-fw fa-microchip"></i> Hardware Integration</li>
+                    <li><i class="fas fa-fw fa-print"></i> 3D Printing</li>
+                    <li><i class="fas fa-fw fa-wrench"></i> Troubleshooting</li>
+                    <li><i class="fas fa-fw fa-project-diagram"></i> TIA Portal</li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <h3><i class="fas fa-users"></i> Professional</h3>
+                <ul>
+                    <li><i class="fas fa-fw fa-headset"></i> User Support</li>
+                    <li><i class="fas fa-fw fa-comments"></i> Technical Communication</li>
+                    <li><i class="fas fa-fw fa-hands-helping"></i> Team Collaboration</li>
+                    <li><i class="fas fa-fw fa-lightbulb"></i> Continuous Learning</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Education</h2>
+        <div class="experience-item">
+            <div class="job-title">Bachelor of Science in Computer Sciences and Informatics</div>
+            <div class="company-name">University of Johannesburg <span class="dates">Graduated December 2020</span></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project-item">
+                <h3>Oxygen Plant Dashboard</h3>
+                <p>SCADA Ignition dashboard to monitor and improve oxygen plant operations.</p>
+            </div>
+            <div class="project-item">
+                <h3>3D-Printed Medical Aids</h3>
+                <p>Custom devices and replacement parts for healthcare settings.</p>
+            </div>
+            <div class="project-item">
+                <h3>School Reporting System</h3>
+                <p>Custom system for report generation and data accuracy.</p>
+            </div>
+            <div class="project-item">
+                <h3>AI-Driven Solutions</h3>
+                <p>Applied AI tools to analyze data and optimize processes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW REFERENCES SECTION -->
+    <div class="section">
+        <h2>References</h2>
+        <div class="references-grid">
+            <div class="reference-item">
+               
+               
+	<h3>Steven P Selolo</h3>
+		<p><strong>Contact:</strong> +27 78 534 9286</p>
+				<p><strong>Email:</strong> pulessteven@gmail.com </p>
+                <hr>
+                <p>Carte - Founder CTO. Working together on a Restaurant POS.</p>
+            </div>
+
+<div class="reference-item">
+	 <h3>Tafadzwa C Mhizha</h3>
+                <p><strong>Contact:</strong> +268 7964 2885</p>
+                <p><strong>Email:</strong> tafadzwachakanetsamhizha@outlook.com</p>
+                <hr>
+                <p>Worked together on systems and hardware solutions at The Luke Commission</p>
+            </div>
+            
+            <div class="reference-item">
+                <h3>Sibusiso Dlamini</h3>
+                <p><strong>Contact:</strong> +268 7605 9395</p>
+                <p><strong>Email:</strong> cruxsbu@gmail.com</p>
+                <hr>
+                <p>Client - Developed an inventory management system for Eclipse Catering</p>
+                
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 4mm; font-size: 0.9rem; color: #7f8c8d; font-style: italic;">
+            Complete contact information for all references is available upon request during the interview process.
+        </p>
+    </div>
+
+    <div class="beyond-work">
+        <p>Fluent in English. Passionate about using technology to bridge gaps in healthcare and education, especially in resource-limited settings. Actively engage in self-guided learning on emerging technologies (AI, 3D printing, automation). Enjoy collaborative problem-solving and developing practical solutions. Work samples (code, 3D models, documentation) available upon request.</p>
+    </div>
+
+    <!-- Particle animation script (will not affect PDF print) -->
+    <script>
+        // Only run particle animation on screen (not for print)
+        if (!window.matchMedia('print').matches) {
+            document.addEventListener('DOMContentLoaded', () => {
+                const container = document.getElementById('particles-container');
+                if (!container) return;
+                
+                const numParticles = 80;
+                const particles = [];
+                const lines = [];
+
+                function createParticle(x, y) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = `${x}px`;
+                    particle.style.top = `${y}px`;
+                    container.appendChild(particle);
+                    particles.push({ element: particle, x: x, y: y });
+                }
+
+                function createLine(p1, p2) {
+                    const line = document.createElement('div');
+                    line.className = 'line';
+                    const dx = p2.x - p1.x;
+                    const dy = p2.y - p1.y;
+                    const length = Math.sqrt(dx * dx + dy * dy);
+                    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+                    line.style.width = `${length}px`;
+                    line.style.transform = `rotate(${angle}deg)`;
+                    line.style.left = `${p1.x}px`;
+                    line.style.top = `${p1.y}px`;
+                    container.appendChild(line);
+                    lines.push(line);
+                }
+
+                for (let i = 0; i < numParticles; i++) {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight;
+                    createParticle(x, y);
+                }
+
+                const maxDistance = 150;
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p1 = particles[i];
+                        const p2 = particles[j];
+                        const distance = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+
+                        if (distance < maxDistance) {
+                            createLine(p1, p2);
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

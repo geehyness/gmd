@@ -3,17 +3,17 @@ import React, { useState } from 'react';
 import {
   Box, Flex, Heading, Text, SimpleGrid, Button, VStack, HStack, Icon,
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton,
-  useDisclosure, Tag, Link, useColorModeValue, useToken, useBreakpointValue,
+  useDisclosure, Tag, Link, useColorModeValue, useToken,
   Image, IconButton
 } from '@chakra-ui/react';
-import { FaExternalLinkAlt, FaGithub, FaCopy, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaGithub, FaCopy, FaExternalLinkAlt } from 'react-icons/fa';
 import { FiExternalLink } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import { projectsData, Project } from '@/data/projectsData';
 
 const MotionBox = motion(Box);
 
-function getScreenshotSrc(id: string, isMobile: boolean) {
+function getScreenshotSrc(id: string, isMobile: boolean = true) {
   const device = isMobile ? 'mobile' : 'desktop';
   return `/projects/${id}.${device}.png`;
 }
@@ -23,63 +23,25 @@ interface DeviceScreenshotProps {
 }
 
 const DeviceScreenshot: React.FC<DeviceScreenshotProps> = ({ projectId }) => {
-  const borderColor = useColorModeValue('neutral.light.border-color', 'neutral.dark.border-color');
   const bgColor = useColorModeValue('neutral.light.bg-card', 'neutral.dark.bg-card');
   const lightGray = useToken('colors', 'gray.200');
 
-  const desktopStyles = {
-    _before: {
-      content: '""',
-      position: 'absolute' as const,
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      zIndex: 1,
-      pointerEvents: 'none',
-      bg: 'transparent',
-      borderColor: lightGray,
-      borderWidth: '2px',
-      borderRadius: 'lg',
-      borderTopRadius: '2xl',
-      borderBottomWidth: '8px',
-      _after: {
-        content: '""',
-        position: 'absolute' as const,
-        bottom: '-8px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        width: '50%',
-        height: '8px',
-        bg: bgColor,
-        borderBottomRadius: 'xl',
-        borderColor: lightGray,
-        borderWidth: '2px',
-        borderTopWidth: 0,
-      },
-    },
-  };
-
   const mobileDeviceStyles = {
-    position: 'absolute' as const,
-    width: '150px',
-    height: '250px',
-    bottom: '-10px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    zIndex: '3',
-    borderRadius: '3xl',
+    width: '120px',
+    height: '200px',
+    borderRadius: '2xl',
     overflow: 'hidden',
-    border: '3px solid',
+    border: '2px solid',
     borderColor: lightGray,
+    position: 'relative' as const,
     _before: {
       content: '""',
       position: 'absolute' as const,
-      top: '10px',
-      left: 'calc(50% - 20px)',
+      top: '8px',
+      left: '50%',
       transform: 'translateX(-50%)',
-      width: '6px',
-      height: '6px',
+      width: '4px',
+      height: '4px',
       bg: bgColor,
       borderRadius: 'full',
       zIndex: 11,
@@ -87,11 +49,11 @@ const DeviceScreenshot: React.FC<DeviceScreenshotProps> = ({ projectId }) => {
     _after: {
       content: '""',
       position: 'absolute' as const,
-      top: '10px',
-      left: 'calc(50% + 5px)',
+      top: '8px',
+      left: 'calc(50% + 10px)',
       transform: 'translateX(-50%)',
-      width: '40px',
-      height: '4px',
+      width: '30px',
+      height: '3px',
       bg: bgColor,
       borderRadius: 'md',
       zIndex: 11,
@@ -101,29 +63,12 @@ const DeviceScreenshot: React.FC<DeviceScreenshotProps> = ({ projectId }) => {
   return (
     <Box
       width="100%"
-      height="250px"
+      height="200px"
       position="relative"
-      bg="gray.100"
-      overflow="hidden"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
     >
-      <Box
-        position="relative"
-        width="100%"
-        height="100%"
-        {...desktopStyles}
-      >
-        <Image
-          src={getScreenshotSrc(projectId, false)}
-          alt={`${projectId} desktop screenshot`}
-          width="100%"
-          height="100%"
-          objectFit="cover"
-          borderTopRadius="2xl"
-          borderRadius="lg"
-          fallbackSrc='/projects/placeholder.png'
-        />
-      </Box>
-
       <Box {...mobileDeviceStyles}>
         <Image
           src={getScreenshotSrc(projectId, true)}
@@ -148,58 +93,20 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project; isOpen: 
   const accentRgba = useToken('colors', 'accent.500');
   const tagTint = useToken('colors', 'brand.50');
   const lightGray = useToken('colors', 'gray.200');
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const desktopStyles = {
-    position: 'relative' as const,
-    width: '100%',
-    height: '100%',
-    borderRadius: 'lg',
-    overflow: 'hidden',
-    _before: {
-      content: '""',
-      position: 'absolute' as const,
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      zIndex: 1,
-      pointerEvents: 'none',
-      bg: 'transparent',
-      borderColor: lightGray,
-      borderWidth: '2px',
-      borderRadius: 'lg',
-      borderTopRadius: '2xl',
-      borderBottomWidth: '8px',
-    },
-    _after: {
-      content: '""',
-      position: 'absolute' as const,
-      bottom: '-8px',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      width: '50%',
-      height: '8px',
-      bg: bgCardToken,
-      borderBottomRadius: 'xl',
-      borderColor: lightGray,
-      borderWidth: '2px',
-      borderTopWidth: 0,
-    },
-  };
 
   const mobileDeviceStyles = {
-    width: '150px',
-    height: '250px',
-    borderRadius: '3xl',
+    width: '250px',
+    height: '400px',
+    borderRadius: '2xl',
     overflow: 'hidden',
     border: '3px solid',
     borderColor: lightGray,
+    position: 'relative' as const,
     _before: {
       content: '""',
       position: 'absolute' as const,
-      top: '10px',
-      left: 'calc(50% - 20px)',
+      top: '12px',
+      left: '50%',
       transform: 'translateX(-50%)',
       width: '6px',
       height: '6px',
@@ -210,8 +117,8 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project; isOpen: 
     _after: {
       content: '""',
       position: 'absolute' as const,
-      top: '10px',
-      left: 'calc(50% + 5px)',
+      top: '12px',
+      left: 'calc(50% + 15px)',
       transform: 'translateX(-50%)',
       width: '40px',
       height: '4px',
@@ -221,101 +128,12 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project; isOpen: 
     },
   };
 
-
-  const slides = [
-    {
-      label: 'Combined View',
-      content: (
-        <Box
-          position="relative"
-          w="full"
-          height="250px"
-          bg="gray.100"
-          overflow="hidden"
-        >
-          <Box {...desktopStyles}>
-            <Image
-              src={getScreenshotSrc(project.id, false)}
-              alt={`${project.name} desktop view`}
-              objectFit="cover"
-              w="full"
-              h="full"
-              fallbackSrc='/projects/placeholder.png'
-            />
-          </Box>
-          <Box
-            position="absolute"
-            top="50%"
-            left="50%"
-            transform="translate(-50%, -50%)"
-            zIndex={2}
-            {...mobileDeviceStyles}
-          >
-            <Image
-              src={getScreenshotSrc(project.id, true)}
-              alt={`${project.name} mobile view`}
-              objectFit="cover"
-              w="full"
-              h="full"
-              fallbackSrc='/projects/placeholder.png'
-            />
-          </Box>
-        </Box>
-      )
-    },
-    {
-      label: 'Desktop View',
-      content: (
-        <Box
-          w="full"
-          h="250px"
-          position="relative"
-          bg="gray.100"
-          overflow="hidden"
-        >
-          <Box {...desktopStyles}>
-            <Image
-              src={getScreenshotSrc(project.id, false)}
-              alt={`${project.name} desktop view`}
-              objectFit="cover"
-              w="full"
-              h="full"
-              fallbackSrc='/projects/placeholder.png'
-            />
-          </Box>
-        </Box>
-      )
-    },
-    {
-      label: 'Mobile View',
-      content: (
-        <Box
-          mx="auto"
-          position="relative"
-          {...mobileDeviceStyles}
-        >
-          <Image
-            src={getScreenshotSrc(project.id, true)}
-            alt={`${project.name} mobile view`}
-            objectFit="cover"
-            w="full"
-            h="full"
-            fallbackSrc='/projects/placeholder.png'
-          />
-        </Box>
-      )
-    }
-  ];
-
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-
   const glassCardProps = {
-    bg: bgCardToken,
+    bg: 'neutral.light.bg-card',
     backdropFilter: 'blur(12px) saturate(160%)',
     border: '1px solid',
     borderColor: borderToken,
-    boxShadow: useColorModeValue('md', 'dark-md'),
+    boxShadow: 'md',
     borderRadius: 'xl',
   } as const;
 
@@ -350,38 +168,30 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project; isOpen: 
 
         <ModalBody pb={6}>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
-            <Box position="relative">
-              {slides[currentSlide].content}
-              <Flex justify="space-between" position="absolute" top="50%" w="100%" transform="translateY(-50%)" px={2}>
-                <IconButton
-                  aria-label="Previous slide"
-                  icon={<FaChevronLeft />}
-                  onClick={prevSlide}
-                  size="sm"
-                  variant="ghost"
+            {/* Left: Mobile Screenshot */}
+            <Box position="relative" display="flex" alignItems="center" justifyContent="center">
+              <Box {...mobileDeviceStyles}>
+                <Image
+                  src={getScreenshotSrc(project.id, true)}
+                  alt={`${project.name} mobile view`}
+                  objectFit="cover"
+                  w="full"
+                  h="full"
+                  fallbackSrc='/projects/placeholder.png'
                 />
-                <IconButton
-                  aria-label="Next slide"
-                  icon={<FaChevronRight />}
-                  onClick={nextSlide}
-                  size="sm"
-                  variant="ghost"
-                />
-              </Flex>
-              <Flex justify="center" mt={2} gap={2}>
-                {slides.map((_, index) => (
-                  <Button
-                    key={index}
-                    size="xs"
-                    variant={index === currentSlide ? 'solid' : 'outline'}
-                    onClick={() => setCurrentSlide(index)}
-                  >
-                    {index + 1}
-                  </Button>
-                ))}
-              </Flex>
+              </Box>
+            </Box>
+
+            {/* Right: Details */}
+            <Box>
+              {project.longDescription && (
+                <Text color={textPrimaryToken} mb={4}>
+                  {project.longDescription}
+                </Text>
+              )}
+
               {project.tech && (
-                <Flex wrap="wrap" gap={2} mt={4}>
+                <Flex wrap="wrap" gap={2} mt={4} mb={4}>
                   {project.tech.map((tech) => (
                     <Tag
                       key={tech}
@@ -394,14 +204,6 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project; isOpen: 
                     </Tag>
                   ))}
                 </Flex>
-              )}
-            </Box>
-
-            <Box>
-              {project.longDescription && (
-                <Text color={textPrimaryToken} mb={4}>
-                  {project.longDescription}
-                </Text>
               )}
 
               {project.links && project.links.length > 0 && (
@@ -416,63 +218,20 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project; isOpen: 
                       _hover={{ color: accentRgba }}
                     >
                       <HStack>
+                        <Icon as={FaExternalLinkAlt} />
                         <Text>{link.label}</Text>
                         {link.note && (
                           <Text fontSize="sm" color={textSecondaryToken}>
                             ({link.note})
                           </Text>
                         )}
-                        <Icon as={FiExternalLink} />
                       </HStack>
                     </Link>
                   ))}
                 </VStack>
               )}
 
-              {project.credentials && (
-                <Box mb={4} p={3} borderRadius="md" bg="blackAlpha.100">
-                  <Text color={accentRgba} fontWeight="bold" mb={2}>
-                    Demo Credentials:
-                  </Text>
-                  <VStack align="start" spacing={1}>
-                    {project.credentials.username && (
-                      <HStack>
-                        <Text color={textPrimaryToken} fontSize="sm">
-                          Username: {project.credentials.username}
-                        </Text>
-                        <Button
-                          size="xs"
-                          variant="ghost"
-                          onClick={() => copyToClipboard(project.credentials!.username!)}
-                        >
-                          <Icon as={FaCopy} />
-                        </Button>
-                      </HStack>
-                    )}
-                    {project.credentials.password && (
-                      <HStack>
-                        <Text color={textPrimaryToken} fontSize="sm">
-                          Password: {project.credentials.password}
-                        </Text>
-                        <Button
-                          size="xs"
-                          variant="ghost"
-                          onClick={() => copyToClipboard(project.credentials!.password!)}
-                        >
-                          <Icon as={FaCopy} />
-                        </Button>
-                      </HStack>
-                    )}
-                    {project.credentials.note && (
-                      <Text color={textSecondaryToken} fontSize="xs">
-                        {project.credentials.note}
-                      </Text>
-                    )}
-                  </VStack>
-                </Box>
-              )}
-
-              <HStack spacing={3}>
+              <HStack spacing={3} mt={6}>
                 {project.repo && (
                   <Button
                     as="a"
@@ -480,24 +239,13 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project; isOpen: 
                     target="_blank"
                     rel="noopener noreferrer"
                     leftIcon={<FaGithub />}
-                    size="sm"
+                    size="md"
                     variant="outline"
                     color={textPrimaryToken}
                   >
                     View Code
                   </Button>
                 )}
-                <Button
-                  size="sm"
-                  variant="solid"
-                  colorScheme="brand"
-                  onClick={() => {
-                    const url = project.links?.[0]?.url || project.repo || '';
-                    copyToClipboard(`${project.name} - ${url}`);
-                  }}
-                >
-                  Copy Quick Link
-                </Button>
               </HStack>
             </Box>
           </SimpleGrid>
@@ -523,10 +271,10 @@ const PublicProjects: React.FC<{ className?: string }> = ({ className }) => {
     backdropFilter: 'blur(12px) saturate(160%)',
     border: '1px solid',
     borderColor: borderToken,
-    boxShadow: useColorModeValue('md', 'dark-md'),
+    boxShadow: 'md',
     borderRadius: 'xl',
     transition: 'all 0.25s ease-in-out',
-    _hover: { transform: 'translateY(-5px)', boxShadow: useColorModeValue('lg', 'dark-lg') }
+    _hover: { transform: 'translateY(-5px)', boxShadow: 'lg' }
   } as const;
 
   const handleProjectClick = (project: Project) => {
@@ -544,7 +292,7 @@ const PublicProjects: React.FC<{ className?: string }> = ({ className }) => {
         </Text>
       </VStack>
 
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 2 }} spacing={6}>
         {projectsData.map((project) => (
           <MotionBox
             key={project.id}
@@ -558,35 +306,30 @@ const PublicProjects: React.FC<{ className?: string }> = ({ className }) => {
               cursor="pointer"
               onClick={() => handleProjectClick(project)}
               height="100%"
-              display="flex"
-              flexDirection="column"
             >
-              <Box
-                width="100%"
-                height="250px"
-                position="relative"
-                overflow="hidden"
-              >
-                <DeviceScreenshot projectId={project.id} />
-              </Box>
+              <Flex direction="row">
+                {/* Left: Phone View */}
+                <Box width="40%" p={4} display="flex" alignItems="center" justifyContent="center">
+                  <DeviceScreenshot projectId={project.id} />
+                </Box>
 
-              <Box p={6} flex={1} display="flex" flexDirection="column">
-                <Heading as="h3" size="md" color={textPrimaryToken} mb={2}>
-                  {project.name}
-                </Heading>
+                {/* Right: Description */}
+                <Box p={4} flex={1} width="60%">
+                  <Heading as="h3" size="md" color={textPrimaryToken} mb={2}>
+                    {project.name}
+                  </Heading>
 
-                {project.shortDescription && (
-                  <Text color={textSecondaryToken} fontSize="sm" mb={4} flex={1}>
-                    {project.shortDescription}
-                  </Text>
-                )}
+                  {project.shortDescription && (
+                    <Text color={textSecondaryToken} fontSize="sm" mb={4}>
+                      {project.shortDescription}
+                    </Text>
+                  )}
 
-                <Flex justify="space-between" align="center" mt="auto">
-                  <Flex wrap="wrap" gap={1}>
-                    {project.tech?.slice(0, 2).map((tech) => (
+                  <Flex wrap="wrap" gap={1} mb={2}>
+                    {project.tech?.slice(0, 3).map((tech) => (
                       <Tag
                         key={tech}
-                        size="sm"
+                        size="xs"
                         variant="subtle"
                         bg={tagTint}
                         color={textPrimaryToken}
@@ -594,20 +337,20 @@ const PublicProjects: React.FC<{ className?: string }> = ({ className }) => {
                         {tech}
                       </Tag>
                     ))}
-                    {project.tech && project.tech.length > 2 && (
-                      <Tag size="sm" variant="subtle" color={textSecondaryToken}>
-                        +{project.tech.length - 2}
+                    {project.tech && project.tech.length > 3 && (
+                      <Tag size="xs" variant="subtle" color={textSecondaryToken}>
+                        +{project.tech.length - 3}
                       </Tag>
                     )}
                   </Flex>
 
                   {project.year && (
-                    <Text color={textSecondaryToken} fontSize="sm">
+                    <Text color={textSecondaryToken} fontSize="xs" mt={2}>
                       {project.year}
                     </Text>
                   )}
-                </Flex>
-              </Box>
+                </Box>
+              </Flex>
             </Box>
           </MotionBox>
         ))}

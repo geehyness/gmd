@@ -24,7 +24,16 @@ export function Footer({ appName = 'Godliness Dongorere' }: FooterProps) {
   const [accentColor] = useToken('colors', ['accent.500']);
 
   return (
-    <Box w="full" bg="#151515" py={12} zIndex={10}>
+    <Box
+      w="full"
+      bg="rgba(21, 21, 21, 0.85)"
+      py={12}
+      zIndex={10}
+      position="relative"
+      sx={{
+        backdropFilter: 'blur(12px) saturate(160%)',
+      }}
+    >
       <Container maxW="container.xl">
         <Flex direction="column" align="center">
           <Heading as="h3" size="md" color="white" mb={4}>

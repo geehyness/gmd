@@ -91,6 +91,7 @@ export const PageTransitionProvider: React.FC<{ children: React.ReactNode }> = (
               justifyContent: 'center',
               pointerEvents: 'none',
             }}
+
           >
             {/* Replaced Barber Pole with Chakra UI Spinner */}
             <Spinner

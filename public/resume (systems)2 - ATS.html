@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Godliness Dongorere - Systems Support Specialist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ATS-FRIENDLY BASE - Simple, semantic structure */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: #fff;
+            max-width: 210mm; /* A4 width */
+            margin: 0 auto;
+            padding: 10mm;
+        }
+        
+        /* HEADER - Clean and professional */
+        .header {
+            text-align: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #2c5282;
+        }
+        
+        .name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 3px;
+            letter-spacing: 0.5px;
+        }
+        
+        .title {
+            font-size: 15px;
+            color: #2c5282;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            font-size: 12px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .contact-item i {
+            color: #2c5282;
+            width: 12px;
+        }
+        
+        a {
+            color: #2c5282;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* SECTIONS */
+        .section {
+            margin-bottom: 10px;
+        }
+        
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a365d;
+            padding-bottom: 3px;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* SUMMARY */
+        .summary {
+            font-size: 12px;
+            text-align: justify;
+            margin-bottom: 12px;
+            padding: 6px;
+            background-color: #f7fafc;
+            border-left: 3px solid #2c5282;
+            line-height: 1.4;
+        }
+        
+        /* SKILLS - 2x2 Grid Layout */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .skill-category {
+            margin-bottom: 0;
+        }
+        
+        .skill-category-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #2c5282;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .skill-category-title i {
+            width: 12px;
+            font-size: 11px;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+        }
+        
+        .skill-tag {
+            background-color: #edf2f7;
+            padding: 1px 5px;
+            border-radius: 2px;
+            font-size: 10px;
+            color: #2d3748;
+            border: 1px solid #e2e8f0;
+            line-height: 1.2;
+        }
+        
+        .skill-tag.highlight {
+            background-color: #edf2f7;
+            border-color: #e2e8f0;
+            font-weight: 500;
+        }
+        
+        /* EXPERIENCE ITEMS - Each point is a separate sub-section */
+        .experience-job {
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 3px;
+            flex-wrap: wrap;
+        }
+        
+        .job-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .dates {
+            font-size: 11px;
+            color: #718096;
+            font-weight: 500;
+            background-color: #f7fafc;
+            padding: 1px 5px;
+            border-radius: 2px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .company {
+            font-size: 12px;
+            color: #4a5568;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+        
+        .experience-point {
+            margin-bottom: 4px;
+            padding-left: 12px;
+            position: relative;
+            font-size: 11px;
+            line-height: 1.3;
+        }
+        
+        .experience-point:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c5282;
+            font-weight: bold;
+        }
+        
+        .experience-nested-point {
+            margin-bottom: 3px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 11px;
+            line-height: 1.3;
+        }
+        
+        .experience-nested-point:before {
+            content: "◦";
+            position: absolute;
+            left: 8px;
+            color: #4a5568;
+        }
+        
+        /* PROJECT ITEMS - Each project section is separate */
+        .project-item {
+            margin-bottom: 8px;
+        }
+        
+        .project-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .project-org {
+            font-size: 11px;
+            color: #4a5568;
+            font-style: italic;
+            background-color: #edf2f7;
+            padding: 1px 5px;
+            border-radius: 2px;
+        }
+        
+        .project-section {
+            margin-bottom: 4px;
+            padding-left: 8px;
+            border-left: 2px solid #e2e8f0;
+        }
+        
+        .project-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 2px;
+        }
+        
+        .project-section-content {
+            font-size: 11px;
+            line-height: 1.3;
+        }
+        
+        /* REFERENCE ITEMS */
+        .reference-item {
+            flex: 1;
+            min-width: 180px;
+            padding: 8px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+            background-color: #fff;
+            margin-bottom: 6px;
+        }
+        
+        .reference-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 3px;
+        }
+        
+        .reference-details {
+            font-size: 11px;
+            color: #4a5568;
+            line-height: 1.2;
+        }
+        
+        /* EDUCATION */
+        .education-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .education-degree {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .education-school {
+            font-size: 12px;
+            color: #4a5568;
+            margin-bottom: 2px;
+        }
+        
+        /* PRINT OPTIMIZATION */
+        @media print {
+            body {
+                padding: 5mm !important;
+                font-size: 9pt !important;
+                line-height: 1.2 !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+            }
+            
+            .name {
+                font-size: 16pt !important;
+                margin-bottom: 2px !important;
+            }
+            
+            .title {
+                font-size: 11pt !important;
+                margin-bottom: 6px !important;
+            }
+            
+            .section-title {
+                font-size: 12pt !important;
+                margin-bottom: 4px !important;
+            }
+            
+            .summary {
+                font-size: 9pt !important;
+                padding: 4px !important;
+                margin-bottom: 8px !important;
+            }
+            
+            /* OPTIMAL PAGE BREAKS - Each point can break individually */
+            .experience-point, .experience-nested-point, .project-section, .reference-item {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 3px !important;
+            }
+            
+            /* Job headers stay with first point */
+            .experience-job {
+                break-inside: auto;
+                page-break-inside: auto;
+                margin-bottom: 6px !important;
+            }
+            
+            .project-item {
+                break-inside: auto;
+                page-break-inside: auto;
+                margin-bottom: 6px !important;
+            }
+            
+            /* Smaller skill tags for print */
+            .skill-tag {
+                font-size: 8pt !important;
+                padding: 1px 3px !important;
+            }
+            
+            /* Reduced font sizes */
+            .job-title, .education-degree, .project-title {
+                font-size: 11pt !important;
+            }
+            
+            .company, .education-school, .reference-name {
+                font-size: 10pt !important;
+            }
+            
+            .experience-point, .experience-nested-point, .project-section-content, .reference-details, .dates {
+                font-size: 9pt !important;
+            }
+            
+            .skill-category-title {
+                font-size: 10pt !important;
+            }
+            
+            .contact-info {
+                font-size: 8pt !important;
+                gap: 6px !important;
+            }
+            
+            a {
+                color: #000 !important;
+                text-decoration: none !important;
+            }
+            
+            .no-print {
+                display: none !important;
+            }
+            
+            /* Prevent orphans/widows */
+            .experience-point, .project-section-content, .reference-details {
+                orphans: 2;
+                widows: 2;
+            }
+        }
+        
+        /* HIGHLIGHT KEYWORDS */
+        .keyword {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1 class="name">Godliness Dongorere</h1>
+        <p class="title">Systems Support Specialist & Software Developer</p>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>+268 7934 2380</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:godlinessdongorere@gmail.com">godlinessdongorere@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-linkedin"></i>
+                <a href="https://linkedin.com/in/gdongorere" target="_blank">linkedin.com/in/gdongorere</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-globe"></i>
+                <a href="https://godliness.vercel.app" target="_blank">godliness.vercel.app</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="summary">
+        Proactive problem-solver with expertise in maintaining mission-critical systems, providing comprehensive ICT support, and developing solutions that enhance operational efficiency. Skilled in software, hardware, and network troubleshooting with a proven ability to minimize downtime and support end-users. Experienced in <span class="keyword">system integration</span> and cross-organizational collaboration with a track record of successful stakeholder engagement.
+    </div>
+
+    <!-- TECHNICAL SKILLS -->
+    <div class="section">
+        <h2 class="section-title">Technical Skills</h2>
+        
+        <div class="skills-grid">
+            <div class="skill-category">
+                <div class="skill-category-title">
+                    <i class="fas fa-code"></i>
+                    Programming
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag highlight">C#</span>
+                    <span class="skill-tag highlight">Java</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">TypeScript</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-category-title">
+                    <i class="fas fa-server"></i>
+                    Systems & Integration
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag highlight">System Integration</span>
+                    <span class="skill-tag">SCADA Ignition</span>
+                    <span class="skill-tag">Siemens PLC</span>
+                    <span class="skill-tag">TIA Portal</span>
+                    <span class="skill-tag">Profinet</span>
+                    <span class="skill-tag">EMR Systems</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-category-title">
+                    <i class="fas fa-cogs"></i>
+                    Web & Mobile Development
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag highlight">Node.js</span>
+                    <span class="skill-tag highlight">Android Studio</span>
+                    <span class="skill-tag">ExpressJS</span>
+                    <span class="skill-tag">Next.js</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">React Native</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">FastAPI</span>
+                    <span class="skill-tag">Git</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-category-title">
+                    <i class="fas fa-network-wired"></i>
+                    Hardware & Solutions
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">3D Modeling</span>
+                    <span class="skill-tag">Hardware Troubleshooting</span>
+                    <span class="skill-tag">LAN/WAN Networks</span>
+                    <span class="skill-tag">VPN Configuration</span>
+                    <span class="skill-tag">System Maintenance</span>
+                    <span class="skill-tag">Mobile App Development</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROFESSIONAL EXPERIENCE - Broken into individual points -->
+    <div class="section">
+        <h2 class="section-title">Professional Experience</h2>
+        
+        <!-- Job 1: Freelance Full-Stack Developer -->
+        <div class="experience-job">
+            <div class="job-header">
+                <div class="job-title">Freelance Full-Stack Developer</div>
+                <div class="dates">January 2025 - Present</div>
+            </div>
+            <div class="company">Various Clients & Collaborations</div>
+            
+            <div class="experience-point">Developed custom business solutions for small enterprises, focusing on operational efficiency and cost reduction</div>
+            <div class="experience-point">Built a multi-restaurant POS system enabling centralized management of multiple business operations from a single platform</div>
+            <div class="experience-point">Created an inventory management system for retail businesses, eliminating spreadsheet dependency and improving stock tracking accuracy</div>
+            <div class="experience-point">Collaborated directly with business owners to translate operational needs into technical specifications</div>
+            <div class="experience-point">Worked with cross-functional stakeholders including restaurant managers, retail owners, and accounting personnel</div>
+        </div>
+        
+        <!-- Job 2: Systems Engineer -->
+        <div class="experience-job">
+            <div class="job-header">
+                <div class="job-title">Systems Engineer</div>
+                <div class="dates">May 2023 - September 2025</div>
+            </div>
+            <div class="company">The Luke Commission</div>
+            
+            <div class="experience-point">Managed critical healthcare systems including <span class="keyword">Electronic Medical Records (EMR)</span> and specialized medical equipment</div>
+            <div class="experience-point">Developed and maintained <span class="keyword">system integrations</span> between medical devices, EMR systems, and operational dashboards</div>
+            <div class="experience-point">Managed Oxygen Plant operations both software and hardware:</div>
+            <div class="experience-nested-point">Implemented an Oxygen Plant Dashboard using <span class="keyword">SCADA Ignition</span>, improving product gas quality through real-time data visualization and <span class="keyword">system integration</span></div>
+            <div class="experience-nested-point">Programmed Siemens PLCs using TIA Portal and integrated Profinet slaves for seamless automation control</div>
+            <div class="experience-point">Debugged and resolved complex hardware and software issues, ensuring minimal downtime for life-critical systems</div>
+            <div class="experience-point">Provided comprehensive ICT support to medical and administrative staff, enhancing operational efficiency</div>
+            <div class="experience-point">Created custom 3D-printed medical devices including camera mounts and orthoses, collaborating with clinical teams</div>
+            <div class="experience-point">Worked with multiple stakeholders including clinical staff, administrative personnel, and external equipment vendors</div>
+        </div>
+        
+        <!-- Job 3: Technical Assistant Intern -->
+        <div class="experience-job">
+            <div class="job-header">
+                <div class="job-title">Technical Assistant Intern</div>
+                <div class="dates">March 2022 - December 2022</div>
+            </div>
+            <div class="company">Ka-Zakhali Private School</div>
+            
+            <div class="experience-point">Developed a custom reporting system for school reports, addressing data accuracy and accessibility challenges</div>
+            <div class="experience-point">Provided comprehensive ICT support, troubleshooting hardware and software issues for staff and students</div>
+            <div class="experience-point">Taught Computer Application Technology to Grade 9-12 students, improving digital literacy</div>
+            <div class="experience-point">Collaborated with teaching staff, administration, and students to identify and address technical needs</div>
+        </div>
+    </div>
+
+    <!-- KEY PROJECTS - Broken into separate sections -->
+    <div class="section">
+        <h2 class="section-title">Key Projects</h2>
+        
+        <!-- Project 1: Oxygen Plant Dashboard -->
+        <div class="project-item">
+            <div class="project-title">
+                <span>Oxygen Plant Dashboard</span>
+                <span class="project-org">The Luke Commission</span>
+            </div>
+            
+            <div class="project-section">
+                <div class="project-section-title">Problem Addressed</div>
+                <div class="project-section-content">Lack of centralized monitoring for critical oxygen production equipment affecting product quality and operational efficiency in a healthcare setting.</div>
+            </div>
+            
+            <div class="project-section">
+                <div class="project-section-title">Solution Implemented</div>
+                <div class="project-section-content">Developed SCADA Ignition dashboard integrating data from multiple sensors and control systems with real-time visualization and alerting capabilities.</div>
+            </div>
+            
+            <div class="project-section">
+                <div class="project-section-title">Personal Contribution</div>
+                <div class="project-section-content">Led system design, PLC programming, and integration of Profinet devices. Created data visualization interfaces and implemented <span class="keyword">system integration</span> with existing infrastructure.</div>
+            </div>
+            
+            <div class="project-section">
+                <div class="project-section-title">Collaboration & Partners</div>
+                <div class="project-section-content">Worked with clinical engineering team, plant operators, medical staff, and international partners to ensure system met operational requirements and compliance standards.</div>
+            </div>
+        </div>
+        
+        <!-- Project 2: AGT FieldCore -->
+        <div class="project-item">
+            <div class="project-title">
+                <span>AGT FieldCore - Construction Field Management System</span>
+                <span class="project-org">Freelance Project</span>
+            </div>
+            
+            <div class="project-section">
+                <div class="project-section-title">Problem Addressed</div>
+                <div class="project-section-content">Construction sites needing offline-capable field management with digital accountability and safety compliance in remote locations with poor connectivity.</div>
+            </div>
+            
+            <div class="project-section">
+                <div class="project-section-title">Solution Implemented</div>
+                <div class="project-section-content">Built an "Offline-First" Progressive Web App (PWA) with local TensorFlow.js for photo analysis and hazard detection, digital signatures for accountability, and QR code asset tracking.</div>
+            </div>
+            
+            <div class="project-section">
+                <div class="project-section-title">Personal Contribution</div>
+                <div class="project-section-content">Lead Developer & System Architect - Implemented edge AI capabilities, offline data synchronization, PWA optimization, and real-time collaboration features.</div>
+            </div>
+            
+            <div class="project-section">
+                <div class="project-section-title">Collaboration & Partners</div>
+                <div class="project-section-content">Collaborated with construction site managers, field operators, safety officers, and project stakeholders to ensure system met operational and compliance requirements.</div>
+            </div>
+        </div>
+        
+        <!-- Project 3: Multi-Restaurant POS System -->
+        <div class="project-item">
+            <div class="project-title">
+                <span>Multi-Restaurant POS System</span>
+                <span class="project-org">Collaboration with Carte</span>
+            </div>
+            
+            <div class="project-section">
+                <div class="project-section-title">Problem Addressed</div>
+                <div class="project-section-content">Independent restaurants needing affordable, centralized management without enterprise software costs and complex licensing.</div>
+            </div>
+            
+            <div class="project-section">
+                <div class="project-section-title">Solution Implemented</div>
+                <div class="project-section-content">Built custom POS platform supporting multiple business entities with centralized reporting, inventory management, and customer relationship features.</div>
+            </div>
+            
+            <div class="project-section">
+                <div class="project-section-title">Personal Contribution</div>
+                <div class="project-section-content">Full-stack development using C#, database design, API development, and integration with payment systems and third-party services.</div>
+            </div>
+            
+            <div class="project-section">
+                <div class="project-section-title">Collaboration & Partners</div>
+                <div class="project-section-content">Partnered with Carte CTO Steven P Selolo, restaurant owners, waitstaff, kitchen managers, and accounting personnel to optimize workflow and system usability.</div>
+            </div>
+        </div>
+        <hr>
+        <p style="text-align: center; margin-top: 4mm; font-size: 0.9rem; color: #292929;">
+            And many more projects. See my full portfolio on my website - <a href="https://godliness.vercel.app" target="_blank" style="color: #00A36C; text-decoration: none;">godliness.vercel.app</a>.
+        </p>
+    </div>
+
+    <hr>
+    <br>
+
+
+    <!-- EDUCATION -->
+    <div class="section">
+        <h2 class="section-title">Education</h2>
+        
+        <div class="education-item">
+            <div>
+                <div class="education-degree">Bachelor of Science in Computer Sciences and Informatics</div>
+                <div class="education-school">University of Johannesburg</div>
+            </div>
+            <div class="dates">Graduated December 2020</div>
+        </div>
+    </div>
+
+    <!-- REFERENCES -->
+    <div class="section">
+        <h2 class="section-title">References</h2>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <!-- Reference 1 -->
+            <div class="reference-item">
+                <div class="reference-name">Steven P Selolo</div>
+                <div class="reference-details">
+                    <strong>Position:</strong> Founder CTO, Carte<br>
+                    <strong>Contact:</strong> +27 78 534 9286<br>
+                    <strong>Email:</strong> pulessteven@gmail.com<br>
+                    <strong>Collaboration:</strong> Worked together on Restaurant POS system development
+                </div>
+            </div>
+            
+            <!-- Reference 2 -->
+            <div class="reference-item">
+                <div class="reference-name">Tafadzwa C Mhizha</div>
+                <div class="reference-details">
+                    <strong>Position:</strong> Colleague, The Luke Commission<br>
+                    <strong>Contact:</strong> +268 7964 2885<br>
+                    <strong>Email:</strong> tafadzwachakanetsamhizha@outlook.com<br>
+                    <strong>Collaboration:</strong> Collaborated on systems and hardware solutions implementation
+                </div>
+            </div>
+            
+            <!-- Reference 3 -->
+            <div class="reference-item">
+                <div class="reference-name">Sibusiso Dlamini</div>
+                <div class="reference-details">
+                    <strong>Position:</strong> Client, Eclipse Catering<br>
+                    <strong>Contact:</strong> +268 7605 9395<br>
+                    <strong>Email:</strong> cruxsbu@gmail.com<br>
+                    <strong>Collaboration:</strong> Developed inventory management system for catering business
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

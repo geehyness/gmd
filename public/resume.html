@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Godliness Dongorere - Full-Stack Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.4;
+            color: #292929;
+            max-width: 800px;
+            margin: 10px auto;
+            padding: 10px 15px;
+            background-color: #f9f9f9;
+            font-weight: 500;
+        }
+
+        /* --- BACKGROUND PARTICLE STYLES --- */
+        #particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: #00A36C;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .line {
+            position: absolute;
+            height: 0.2px;
+            background-color: #00A36C;
+            opacity: 0.08;
+            transform-origin: 0 50%;
+        }
+
+        /* --- YOUR ORIGINAL RESUME STYLES --- */
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin: 0;
+            color: #102E4A;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin: 3px 0 8px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .contact-info a {
+            color: #00A36C;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .summary {
+            text-align: center;
+            margin: 10px 0 20px;
+            font-style: italic;
+            color: #292929;
+        }
+
+        .section {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #00A36C;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section h2 {
+            font-size: 1.6rem;
+            color: #00A36C;
+            border-bottom: 2px solid #00A36C;
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+        }
+
+        .job-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #102E4A;
+            margin-bottom: 3px;
+            margin-top: 15px;
+        }
+
+        .company-name {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+
+        .dates {
+            font-size: 0.8rem;
+            color: #95a5a6;
+            float: right;
+        }
+        
+        .experience-item {
+            margin-bottom: 8px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 3px 0;
+        }
+
+        li {
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        li .fas, li .fab {
+            color: #00A36C;
+        }
+
+        .skill-category {
+            font-weight: bold;
+            color: #102E4A;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .skill-box {
+            background-color: #fff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            flex: 1;
+        }
+
+        .skill-box h3 {
+            margin-top: 0;
+            color: #00A36C;
+            font-size: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .project-item {
+            background-color: #fff;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .project-item h3 {
+            margin-top: 0;
+            color: #00A36C;
+            font-size: 1rem;
+        }
+
+        .project-item p {
+            font-size: 0.8rem;
+            color: #292929;
+        }
+
+        .beyond-work {
+            text-align: center;
+            font-style: normal;
+            font-size: 0.8rem;
+            color: #292929;
+            margin-top: 10px;
+        }
+
+        /* Responsive & Print Styles */
+        @media (max-width: 600px) {
+            body {
+                padding: 8px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .skills-grid {
+                flex-direction: column;
+            }
+        }
+        
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-container"></div>
+    <div class="header">
+        <h1>Godliness Dongorere</h1>
+        <p>Full-Stack Developer & Creative Problem Solver</p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+268 7934 2380</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span><a href="mailto:godlinessdongorere@gmail.com">godlinessdongorere@gmail.com</a></span>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-linkedin"></i>
+                <span><a href="https://linkedin.com/in/gdongorere" target="_blank">linkedin.com/in/gdongorere</a></span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-globe"></i>
+                <span><a href="https://godliness.vercel.app" target="_blank">godliness.vercel.app</a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="summary">
+        <p>A developer passionate about building things that matter—whether it's code, automated systems, or 3D-printed solutions. I thrive on turning complex problems into simple, working solutions that make a real difference for businesses and people.</p>
+    </div>
+
+    <div class="section">
+        <h2>Experience</h2>
+        <div class="experience-item">
+            <div class="job-title">Freelance Full-Stack Developer <span class="dates">January 2025 - Present</span></div>
+            <p>Helping small businesses build tools that make their work easier. I recently worked with restaurants and retail shops, creating custom systems that handle their specific needs without the big software price tag.</p>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Built a multi-restaurant POS system that lets different businesses run their operations from one platform.</li>
+                <li><i class="fas fa-check-circle"></i> Created a stock management system that helped a shop owner track inventory without spreadsheets.</li>
+                <li><i class="fas fa-check-circle"></i> Worked directly with business owners to understand what they actually need, not just what they ask for.</li>
+            </ul>
+        </div>
+        <div class="experience-item">
+            <div class="job-title">Systems Engineer <span class="dates">May 2023 - Present</span></div>
+            <div class="company-name">The Luke Commission</div>
+            <p>Working on everything from hospital software to oxygen plant controls—wherever technology can help people get better care.</p>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Built a dashboard that shows oxygen plant operators exactly what's happening in real-time.</li>
+                <li><i class="fas fa-check-circle"></i> Programmed the systems that keep medical equipment running smoothly.</li>
+                <li><i class="fas fa-check-circle"></i> Designed and 3D-printed parts when they couldn't be purchased—from camera mounts to medical devices.</li>
+                <li><i class="fas fa-check-circle"></i> Used AI tools to spot patterns and solve problems before they become emergencies.</li>
+            </ul>
+        </div>
+        <div class="experience-item">
+            <div class="job-title">Tech Intern <span class="dates">March - December 2022</span></div>
+            <div class="company-name">Ka-Zakhali Private School</div>
+            <p>Built a system that made report cards easier for teachers and helped students get better at using technology.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-box">
+                <h3><i class="fas fa-laptop-code"></i> Software Development</h3>
+                <ul>
+                    <li><i class="fab fa-fw fa-react"></i> Next.js</li>
+                    <li><i class="fab fa-fw fa-react"></i> React</li>
+                    <li><i class="fab fa-fw fa-node-js"></i> Node.js</li>
+                    <li><i class="fab fa-fw fa-node-js"></i> Express.js</li>
+                    <li><i class="fas fa-fw fa-code"></i> TypeScript</li>
+                    <li><i class="fab fa-fw fa-python"></i> Python</li>
+                    <li><i class="fab fa-fw fa-java"></i> Java</li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <h3><i class="fas fa-tools"></i> Systems Integration</h3>
+                <ul>
+                    <li><i class="fas fa-fw fa-cogs"></i> Siemens PLC</li>
+                    <li><i class="fas fa-fw fa-tachometer-alt"></i> SCADA systems</li>
+                    <li><i class="fas fa-fw fa-cube"></i> 3D printing</li>
+                    <li><i class="fas fa-fw fa-microchip"></i> Hardware integration</li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <h3><i class="fas fa-lightbulb"></i> Problem-Solving</h3>
+                <ul>
+                    <li><i class="fas fa-fw fa-chart-bar"></i> Data analysis</li>
+                    <li><i class="fas fa-fw fa-robot"></i> Process automation</li>
+                    <li><i class="fas fa-fw fa-brain"></i> AI tools</li>
+                    <li><i class="fas fa-fw fa-drafting-compass"></i> System design</li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <h3><i class="fas fa-users"></i> Collaboration</h3>
+                <ul>
+                    <li><i class="fas fa-fw fa-handshake"></i> Client projects</li>
+                    <li><i class="fas fa-fw fa-users"></i> Team collaboration</li>
+                    <li><i class="fas fa-fw fa-chalkboard-teacher"></i> Explaining tech</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Education</h2>
+        <div class="job-title">Bachelor of Science in Computer Sciences and Informatics</div>
+        <div class="company-name">University of Johannesburg <span class="dates">Graduated December 2020</span></div>
+    </div>
+
+    <div class="section">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project-item">
+                <h3>The Chair App</h3>
+                <p>A barbershop management and booking system.</p>
+            </div>
+            <div class="project-item">
+                <h3>Kimmy's Ordering System</h3>
+                <p>A simple restaurant ordering system.</p>
+            </div>
+            <div class="project-item">
+                <h3>Restaurant POS System</h3>
+                <p>Lets multiple restaurants use one system securely.</p>
+            </div>
+            <div class="project-item">
+                <h3>Shop Inventory Manager</h3>
+                <p>Replaced messy spreadsheets with a simple web app.</p>
+            </div>
+            <div class="project-item">
+                <h3>Hospital Oxygen Monitor</h3>
+                <p>Real-time dashboard for critical medical equipment.</p>
+            </div>
+            <div class="project-item">
+                <h3>3D-Printed Medical Aids</h3>
+                <p>Custom devices for patients who need them.</p>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: #292929;">
+            And many more projects. See my full portfolio on my <a href="https://godliness.vercel.app" target="_blank" style="color: #00A36C; text-decoration: none;">website</a>.
+        </p>
+    </div>
+
+    <div class="section beyond-work">
+        <p>Love learning how things work and making them work better. 3D printing serves as a personal workshop for designing and printing solutions. I believe technology should help people, especially where resources are limited. Happy to share actual work samples—code, 3D designs, or project examples. I'm looking for a team that builds things that matter.</p>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('particles-container');
+        const numParticles = 80;
+        const particles = [];
+        const lines = [];
+
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            container.appendChild(particle);
+            particles.push({ element: particle, x: x, y: y });
+        }
+
+        function createLine(p1, p2) {
+            const line = document.createElement('div');
+            line.className = 'line';
+            const dx = p2.x - p1.x;
+            const dy = p2.y - p1.y;
+            const length = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+            line.style.width = `${length}px`;
+            line.style.transform = `rotate(${angle}deg)`;
+            line.style.left = `${p1.x}px`;
+            line.style.top = `${p1.y}px`;
+            container.appendChild(line);
+            lines.push(line);
+        }
+
+        for (let i = 0; i < numParticles; i++) {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            createParticle(x, y);
+        }
+
+        const maxDistance = 150;
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const p1 = particles[i];
+                const p2 = particles[j];
+                const distance = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+
+                if (distance < maxDistance) {
+                    createLine(p1, p2);
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -4,7 +4,7 @@
 import { usePathname } from 'next/navigation';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { Box, Flex } from '@chakra-ui/react'; // Added Flex
+import { Box, Flex } from '@chakra-ui/react';
 import React from 'react';
 
 export default function ClientLayout({
@@ -22,8 +22,7 @@ export default function ClientLayout({
     const navbarType = isDashboardPage ? 'dashboard' : 'customer';
 
     return (
-        // Changed to Flex container with column direction
-        <Flex direction="column" minH="100vh">
+        <Flex direction="column" minH="100vh" className="content-above-starfield">
             <Navbar
                 type={navbarType}
                 appName={siteTitle}
@@ -32,10 +31,11 @@ export default function ClientLayout({
             <Box
                 pt={isHomeViewerPage ? '0' : '64px'}
                 flex="1"
+                position="relative"
+                zIndex={10}
             >
                 {children}
             </Box>
-            {/* Footer now at the bottom of the viewport */}
             {!isHomeViewerPage && <Footer appName={siteTitle} />}
         </Flex>
     );
