@@ -34,7 +34,7 @@ export function Navbar({ appName, siteLogoUrl, type = 'customer' }: NavbarProps)
 
     // src/components/Navbar.tsx - Updated excerpt
     const glassCardStyle = {
-        bg: 'rgba(31, 31, 31, 0.85)',
+        bg: 'rgba(14, 14, 14, 0.85)',
         backdropFilter: 'blur(12px) saturate(160%)',
         border: '1px solid',
         borderColor: 'rgba(229, 229, 229, 0.8)',

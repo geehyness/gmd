@@ -66,7 +66,7 @@ body {
 
 /* Glass card utility class - UPDATED FOR DARK THEME */
 .glass-card {
-  background: rgba(31, 31, 31, 0.85); /* Dark semi-transparent */
+  background: rgba(14, 14, 14, 0.85); /* Dark semi-transparent */
   backdrop-filter: blur(12px) saturate(160%);
   border: 1px solid rgba(64, 64, 64, 0.8); /* Dark border */
   border-radius: 1rem;
@@ -96,7 +96,7 @@ a, button {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(31, 31, 31, 0.5); /* Dark */
+  background: rgba(14, 14, 14, 0.5); /* Dark */
 }
 
 ::-webkit-scrollbar-thumb {

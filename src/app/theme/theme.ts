@@ -30,7 +30,7 @@ const colors = {
       'bg-primary': '#151515',
       'bg-secondary': '#1A1A1A',
       'bg-header': '#1F1F1F',
-      'bg-card': 'rgba(31, 31, 31, 0.85)', // This is key - semi-transparent dark
+      'bg-card': 'rgba(14, 14, 14, 0.85)', // This is key - semi-transparent dark
       'text-primary': '#FFFFFF',
       'text-secondary': '#A0A0A0',
       'border-color': 'rgba(64, 64, 64, 0.8)',
@@ -44,7 +44,7 @@ const colors = {
       'bg-primary': '#151515',
       'bg-secondary': '#1A1A1A',
       'bg-header': '#1F1F1F',
-      'bg-card': 'rgba(31, 31, 31, 0.85)',
+      'bg-card': 'rgba(14, 14, 14, 0.85)',
       'text-primary': '#FFFFFF',
       'text-secondary': '#A0A0A0',
       'border-color': 'rgba(64, 64, 64, 0.8)',

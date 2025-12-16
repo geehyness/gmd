@@ -1,3 +1,4 @@
+// src/context/StarfieldContext.tsx
 'use client';
 
 import React, { createContext, useContext, useState, useRef, useCallback } from 'react';
@@ -12,6 +13,7 @@ export interface Planet {
 	color: string;
 	angle: number;
 	parentStarId: number;
+	independent?: boolean;
 }
 
 export interface Star {
@@ -73,32 +75,37 @@ export interface StarfieldConfig {
 }
 
 export const DEFAULT_CONFIG: StarfieldConfig = {
-	starCount: 50,
+	starCount: 120, // More stars for better coverage
 	minSize: 1,
 	maxSize: 8,
 	minDepth: 0.1,
-	maxDepth: 60.0,
-	baseSpeed: 0.000005,
-	momentumDecay: 0.95,
-	scrollSensitivity: 0.000001,
-	glowIntensity: 0.3,
-	connectionChance: 0.4,
-	maxConnectionDistance: 150,
-	rotationSpeed: 0.0005,
-	trailOpacity: 0.85,
-	planetChance: 0.2,
-	maxPlanetsPerStar: 10,
+	maxDepth: 100.0,
+	baseSpeed: 0.00005, // HALF SPEED (was 0.000004)
+	momentumDecay: 0.97,
+	scrollSensitivity: 0.0000003, // HALF SENSITIVITY
+	glowIntensity: 1.0,
+	connectionChance: 0.25,
+	maxConnectionDistance: 180,
+	rotationSpeed: 0.0002, // HALF SPEED (was 0.0004)
+	trailOpacity: 0.6,
+	planetChance: 0.8,
+	maxPlanetsPerStar: 6,
+	// In StarfieldContext.tsx, update the gravity value:
 	blackHole: {
 		isEnabled: true,
-		mass: 110,
-		gravity: 0.1,
-		attractionRadius: 600,
-		spin: 2,
+		mass: 120,
+		gravity: 100, // Increased from 0.002 (100x stronger)
+		attractionRadius: 900,
+		spin: 0.8,
 		accretionDisk: true,
 		escapeMomentumThreshold: 25,
-		layers: 1,
-		pulseSpeed: 0.002,
-		colorPalette: ['#FF3F00', '#FF6B00', '#FF9500', '#00B4D8', '#0077B6']
+		layers: 2,
+		pulseSpeed: 0.0008,
+		colorPalette: [
+			'#FF3F00', '#FF6B00', '#FF9500',
+			'#00B4D8', '#0077B6', '#0096C7',
+			'#7209B7', '#560BAD'
+		]
 	}
 };
 
@@ -110,6 +117,7 @@ interface StarfieldContextType {
 	isInitialized: boolean;
 	interactiveCircle: InteractiveCircle | null;
 	setInteractiveCircle: (circle: InteractiveCircle | null) => void;
+	setIsInitialized: (value: boolean) => void;
 }
 
 const StarfieldContext = createContext<StarfieldContextType | undefined>(undefined);
@@ -167,7 +175,7 @@ export const StarfieldProvider: React.FC<StarfieldProviderProps> = ({ children }
 				updateBlackHoleConfig,
 				resetConfig,
 				isInitialized,
-				setIsInitialized: () => setIsInitialized(true),
+				setIsInitialized,
 				interactiveCircle,
 				setInteractiveCircle
 			}}

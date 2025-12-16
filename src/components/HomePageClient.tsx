@@ -15,20 +15,34 @@ const MotionBox = motion(Box);
 const HomePageClient: React.FC = () => {
   const contentSectionRef = useRef<HTMLDivElement>(null);
 
-  // Token strings for Chakra props
-  const bgCardToken = useColorModeValue('neutral.light.bg-card', 'neutral.dark.bg-card');
-  const textPrimaryToken = useColorModeValue('neutral.light.text-primary', 'neutral.dark.text-primary');
-  const textSecondaryToken = useColorModeValue('neutral.light.text-secondary', 'neutral.dark.text-secondary');
-  const borderToken = useColorModeValue('neutral.light.border-color', 'neutral.dark.border-color');
+  // Get token names for color mode
+  const bgCardTokenName = useColorModeValue('neutral.light.bg-card', 'neutral.dark.bg-card');
+  const textPrimaryTokenName = useColorModeValue('neutral.light.text-primary', 'neutral.dark.text-primary');
+  const textSecondaryTokenName = useColorModeValue('neutral.light.text-secondary', 'neutral.dark.text-secondary');
+  const borderTokenName = useColorModeValue('neutral.light.border-color', 'neutral.dark.border-color');
 
-  // computed colors
-  const [accentRgba, tagTint] = useToken('colors', ['accent.500', 'brand.50']);
+  // Get actual color values from tokens
+  const [
+    accentRgba,
+    tagTint,
+    bgCardValue,
+    textPrimaryValue,
+    textSecondaryValue,
+    borderColorValue
+  ] = useToken('colors', [
+    'accent.500',
+    'brand.50',
+    bgCardTokenName,
+    textPrimaryTokenName,
+    textSecondaryTokenName,
+    borderTokenName
+  ]);
 
   const glassCardProps = {
-    bg: 'neutral.light.bg-card',
+    bg: bgCardValue,
     backdropFilter: 'blur(12px) saturate(160%)',
     border: '1px solid',
-    borderColor: borderToken,
+    borderColor: borderColorValue,
     boxShadow: 'md',
     borderRadius: 'xl',
     transition: 'all 0.25s ease-in-out',
@@ -145,7 +159,7 @@ const HomePageClient: React.FC = () => {
               size={{ base: "2xl", md: "3xl" }}
               fontWeight="extrabold"
               letterSpacing="tight"
-              color={textPrimaryToken}
+              color={textPrimaryValue}
               mb={2}
             >
               Godliness
@@ -167,7 +181,7 @@ const HomePageClient: React.FC = () => {
                 icon={<FiGithub size="24px" />}
                 variant="solid"
                 size="lg"
-                borderRadius="full"
+
                 {...glassCardProps}
                 color={accentRgba}
                 _hover={{ bg: accentRgba, color: "white", transform: "scale(1.1)" }}
@@ -180,7 +194,7 @@ const HomePageClient: React.FC = () => {
                 icon={<FiLinkedin size="24px" />}
                 variant="solid"
                 size="lg"
-                borderRadius="full"
+
                 {...glassCardProps}
                 color={accentRgba}
                 _hover={{ bg: accentRgba, color: "white", transform: "scale(1.1)" }}
@@ -193,7 +207,7 @@ const HomePageClient: React.FC = () => {
                 icon={<FiMail size="24px" />}
                 variant="solid"
                 size="lg"
-                borderRadius="full"
+
                 {...glassCardProps}
                 color={accentRgba}
                 _hover={{ bg: accentRgba, color: "white", transform: "scale(1.1)" }}
@@ -202,7 +216,7 @@ const HomePageClient: React.FC = () => {
               />
             </HStack>
 
-            <Text fontSize={{ base: "md", md: "lg" }} color={textSecondaryToken} mt={4}>
+            <Text fontSize={{ base: "md", md: "lg" }} color={textSecondaryValue} mt={4}>
               Software Developer | FullStack Solutions
             </Text>
           </MotionBox>
@@ -214,7 +228,7 @@ const HomePageClient: React.FC = () => {
           >
             <Button
               variant="ghost"
-              color={textPrimaryToken}
+              color={textPrimaryValue}
               _hover={{ color: accentRgba, transform: "translateY(4px)" }}
               onClick={scrollToContent}
               aria-label="Scroll to content"
@@ -240,7 +254,7 @@ const HomePageClient: React.FC = () => {
               {...glassCardProps}
             >
               <Icon as={contact.icon} color={accentRgba} boxSize={6} mr={3} />
-              <Text color={textPrimaryToken} fontSize="lg">{contact.text}</Text>
+              <Text color={textPrimaryValue} fontSize="lg">{contact.text}</Text>
             </Flex>
           ))}
         </SimpleGrid>
@@ -254,7 +268,7 @@ const HomePageClient: React.FC = () => {
         <Box mb={20} {...glassCardProps} p={8}>
           <VStack spacing={2} mb={8} textAlign="center">
             <Text color={accentRgba} fontWeight="bold">SKILLS & EXPERTISE</Text>
-            <Heading as="h2" size="xl" color={textPrimaryToken}>Technical Proficiencies</Heading>
+            <Heading as="h2" size="xl" color={textPrimaryValue}>Technical Proficiencies</Heading>
           </VStack>
 
           <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
@@ -268,7 +282,7 @@ const HomePageClient: React.FC = () => {
                       size="md"
                       variant="subtle"
                       bg={tagTint}
-                      color={textPrimaryToken}
+                      color={textPrimaryValue}
                       m={1}
                       borderRadius="md"
                     >
@@ -285,14 +299,14 @@ const HomePageClient: React.FC = () => {
         <Box mb={20}>
           <VStack spacing={2} mb={8} textAlign="center">
             <Text color={accentRgba} fontWeight="bold">PROFESSIONAL EXPERIENCE</Text>
-            <Heading as="h2" size="xl" color={textPrimaryToken}>Work History</Heading>
+            <Heading as="h2" size="xl" color={textPrimaryValue}>Work History</Heading>
           </VStack>
 
           <VStack spacing={8} align="stretch">
             {experience.map((exp, index) => (
               <Box key={index} {...glassCardProps} p={8}>
                 <Flex justify="space-between" direction={{ base: "column", md: "row" }} mb={4}>
-                  <Heading as="h3" size="lg" color={textPrimaryToken}>{exp.position}</Heading>
+                  <Heading as="h3" size="lg" color={textPrimaryValue}>{exp.position}</Heading>
                   <Text color={accentRgba} fontSize="lg" fontWeight="bold">{exp.period}</Text>
                 </Flex>
                 <Text color={accentRgba} fontSize="xl" mb={6}>{exp.company}</Text>
@@ -301,7 +315,7 @@ const HomePageClient: React.FC = () => {
                   {exp.achievements.map((achievement, idx) => (
                     <HStack key={idx} align="flex-start">
                       <Icon as={FaRocket} color={accentRgba} mt={1} />
-                      <Text color={textPrimaryToken}>{achievement}</Text>
+                      <Text color={textPrimaryValue}>{achievement}</Text>
                     </HStack>
                   ))}
                 </VStack>
@@ -314,14 +328,14 @@ const HomePageClient: React.FC = () => {
         <Box mb={20} {...glassCardProps} p={8}>
           <VStack spacing={2} mb={6} textAlign="center">
             <Text color={accentRgba} fontWeight="bold">INTERESTS</Text>
-            <Heading as="h2" size="xl" color={textPrimaryToken}>Personal Interests</Heading>
+            <Heading as="h2" size="xl" color={textPrimaryValue}>Personal Interests</Heading>
           </VStack>
 
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
             {interests.map((interest, index) => (
               <HStack key={index} align="flex-start" spacing={3}>
                 <Icon as={FaRocket} color={accentRgba} mt={1} />
-                <Text color={textPrimaryToken} fontSize="lg">{interest}</Text>
+                <Text color={textPrimaryValue} fontSize="lg">{interest}</Text>
               </HStack>
             ))}
           </SimpleGrid>
@@ -331,7 +345,6 @@ const HomePageClient: React.FC = () => {
         <Flex
           justify="center"
           p={10}
-          borderRadius="2xl"
           bgGradient={`linear-gradient(135deg, ${accentRgba}40, ${accentRgba}80)`}
           mb={20}
           {...glassCardProps}
