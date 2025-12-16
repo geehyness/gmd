@@ -84,7 +84,7 @@ export const DEFAULT_CONFIG: StarfieldConfig = {
 	momentumDecay: 0.97,
 	scrollSensitivity: 0.0000003, // HALF SENSITIVITY
 	glowIntensity: 0.1,
-	connectionChance: 0.25,
+	connectionChance: 0,
 	maxConnectionDistance: 180,
 	rotationSpeed: 0.0002, // HALF SPEED (was 0.0004)
 	trailOpacity: 0.4,
