@@ -48,7 +48,7 @@ const ProjectsPageClient: React.FC<ProjectsPageClientProps> = ({ projects }) => 
                         A showcase of my recent work and a glimpse into my capabilities in modern software development.
                     </Text>
                 </Flex>
-                <PublicProjects />
+                <PublicProjects variant="grid" />
             </Container>
         </Box>
     );
