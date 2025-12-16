@@ -75,7 +75,7 @@ export interface StarfieldConfig {
 }
 
 export const DEFAULT_CONFIG: StarfieldConfig = {
-	starCount: 120, // More stars for better coverage
+	starCount: 170, // More stars for better coverage
 	minSize: 1,
 	maxSize: 8,
 	minDepth: 0.1,
@@ -87,14 +87,14 @@ export const DEFAULT_CONFIG: StarfieldConfig = {
 	connectionChance: 0.25,
 	maxConnectionDistance: 180,
 	rotationSpeed: 0.0002, // HALF SPEED (was 0.0004)
-	trailOpacity: 0.6,
-	planetChance: 0.8,
-	maxPlanetsPerStar: 6,
+	trailOpacity: 0.2,
+	planetChance: 0.7,
+	maxPlanetsPerStar: 3,
 	// In StarfieldContext.tsx, update the gravity value:
 	blackHole: {
 		isEnabled: true,
 		mass: 120,
-		gravity: 100, // Increased from 0.002 (100x stronger)
+		gravity: 90, // Increased from 0.002 (100x stronger)
 		attractionRadius: 900,
 		spin: 0.8,
 		accretionDisk: true,
