@@ -31,7 +31,7 @@ const HomePageClient: React.FC = () => {
     borderColorValue
   ] = useToken('colors', [
     'accent.500',
-    'brand.50',
+    'brand.900',
     bgCardTokenName,
     textPrimaryTokenName,
     textSecondaryTokenName,

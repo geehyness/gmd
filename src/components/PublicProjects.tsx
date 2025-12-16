@@ -90,7 +90,7 @@ function ProjectModal({ project, isOpen, onClose }: { project: Project; isOpen: 
   const bgCardToken = useColorModeValue('neutral.light.bg-card', 'neutral.dark.bg-card');
   const borderToken = useColorModeValue('neutral.light.border-color', 'neutral.dark.border-color');
   const accentRgba = useToken('colors', 'accent.500');
-  const tagTint = useToken('colors', 'brand.50');
+  const tagTint = useToken('colors', 'brand.900');
   const lightGray = useToken('colors', 'gray.200');
 
   const mobileDeviceStyles = {
@@ -278,7 +278,7 @@ const PublicProjects: React.FC<PublicProjectsProps> = ({
   const bgCardToken = useColorModeValue('neutral.light.bg-card', 'neutral.dark.bg-card');
   const borderToken = useColorModeValue('neutral.light.border-color', 'neutral.dark.border-color');
   const accentRgba = useToken('colors', 'accent.500');
-  const tagTint = useToken('colors', 'brand.50');
+  const tagTint = useToken('colors', 'brand.900');
 
   const glassCardProps = {
     bg: bgCardToken,
