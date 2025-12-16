@@ -43,13 +43,10 @@ The platform supports both product sales and service bookings with negotiable pr
         tech: ['Next.js', 'React', 'Node.js', 'MongoDB', 'Redis', 'Mapbox', 'Chakra UI', 'Vercel', 'Service Workers'],
         links: [
             { label: 'Marketplace', url: 'https://venda-khona.vercel.app' },
-            { label: 'Admin Panel', url: 'https://venda-khona-admin.vercel.app', note: 'Seller dashboard' },
-            { label: 'User Manual', url: 'https://venda-khona.vercel.app/manual.html', note: 'Complete documentation' }
         ],
         credentials: { username: 'seller@demo.com', password: 'vendakhona2024', note: 'Test seller account with sample listings' },
         year: 2024,
         role: 'Full-stack Developer & Product Designer',
-        repo: 'https://github.com/geehyness/venda-khona',
         screenshotAlt: 'Venda Khona marketplace with shop listings',
         category: 'ecommerce',
         featured: true,
@@ -81,7 +78,6 @@ The system includes modules for field logs, asset tracking, safety compliance, p
         credentials: { username: 'field_operator', password: 'demo@agt123', note: 'Use "project_manager" for admin features' },
         year: 2024,
         role: 'Lead Developer & System Architect',
-        repo: 'https://github.com/geehyness/agtfieldcore',
         screenshotAlt: 'AGT FieldCore field management dashboard',
         category: 'enterprise',
         featured: true,
@@ -112,14 +108,12 @@ Key Features:
 • Regional Coverage: Business listings across SADC countries`,
         tech: ['Next.js PWA', 'TypeScript', 'React', 'MongoDB', 'Stripe', 'Mapbox', 'Chakra UI', 'Vercel'],
         links: [
-            { label: 'Customer Portal', url: 'https://nexa-sol-customers.vercel.app' },
             { label: 'SADC Business Wire', url: 'https://nexa-solutions.africa/#/news', note: 'Regional business news' },
             { label: 'Main Platform', url: 'https://nexa-solutions.africa', note: 'Complete ecosystem' }
         ],
         credentials: { note: 'Use role switcher in demo to access: Customer, Staff, Admin portals' },
         year: 2024,
         role: 'Lead Full-stack Developer & Platform Architect',
-        repo: 'https://github.com/geehyness/nexacore',
         screenshotAlt: 'NexaCore business platform with services and network',
         category: 'marketplace',
         featured: true,
@@ -151,7 +145,6 @@ Demonstrates complex role-based UI, academic workflow automation, and multi-tena
         credentials: { note: 'Switch between: Student, Teacher, Admin roles in application' },
         year: 2024,
         role: 'Lead Full-Stack Developer & System Architect',
-        repo: 'https://github.com/geehyness/school-template',
         screenshotAlt: 'ECOT university management system dashboard',
         category: 'education',
         featured: true,
@@ -179,13 +172,10 @@ Core Features:
 
 The system includes a main application for operations, Sanity dashboard for content management, and comprehensive user documentation.`,
         tech: ['Next.js', 'TypeScript', 'Sanity.io', 'PostgreSQL', 'React', 'Chakra UI'],
-        links: [
-            { label: 'Documentation', url: 'https://caterflow-docs.vercel.app', note: 'User guides' }
-        ],
+
         credentials: { note: 'Private deployment - no public access available' },
         year: 2023,
         role: 'Full-stack Developer & System Architect',
-        repo: 'https://github.com/geehyness/caterflow',
         screenshotAlt: 'Caterflow inventory management system',
         category: 'management',
         featured: false
