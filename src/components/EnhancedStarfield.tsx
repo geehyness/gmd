@@ -161,7 +161,7 @@ const EnhancedStarfield: React.FC = () => {
 	const configRef = useRef(config);
 
 	const [bgPrimaryHex] = useToken('colors', ['neutral.light.bg-primary']);
-	const canvasBg = 'rgba(10, 10, 20, 1)';
+	const canvasBg = 'rgba(10, 10, 10, 1)';
 
 	const [isPointerDown, setIsPointerDown] = useState(false);
 	const mousePosRef = useRef<{ x: number; y: number } | null>(null);
@@ -1025,9 +1025,10 @@ const EnhancedStarfield: React.FC = () => {
 			bhX, bhY, schwarzschildRadius * pulse
 		);
 		coreGradient.addColorStop(0, '#000000');
-		coreGradient.addColorStop(0.3, '#111111');
-		coreGradient.addColorStop(0.7, '#222222');
-		coreGradient.addColorStop(1, '#333333');
+		coreGradient.addColorStop(0.9, '#050505');
+		coreGradient.addColorStop(0.98, '#121212');
+		coreGradient.addColorStop(0.99, '#202020');
+		coreGradient.addColorStop(1, '#333');
 
 		ctx.fillStyle = coreGradient;
 		ctx.beginPath();
