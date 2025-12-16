@@ -8,7 +8,7 @@ import {
 	Slider, SliderTrack, SliderFilledTrack, SliderThumb,
 	Switch, Collapse, Button, Divider, useDisclosure, Icon
 } from '@chakra-ui/react';
-import { FaTimes, FaCog, FaRocket, FaSun, FaMoon, FaMeteor, FaExpand, FaLink, FaPlay, FaBlackHole } from 'react-icons/fa';
+import { FaTimes, FaCog, FaRocket, FaSun, FaMoon, FaMeteor, FaExpand, FaLink, FaPlay } from 'react-icons/fa';
 import { useStarfield } from '@/contexts/StarfieldContext';
 import { useToken } from '@chakra-ui/react';
 
@@ -48,7 +48,7 @@ const StarfieldControls: React.FC = () => {
 	const controlSections = [
 		{
 			title: "Black Hole Core",
-			icon: FaBlackHole,
+			icon: FaPlay,
 			controls: [
 				{
 					label: "Enable Black Hole",
