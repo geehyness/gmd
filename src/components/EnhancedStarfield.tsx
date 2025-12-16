@@ -1043,7 +1043,7 @@ const EnhancedStarfield: React.FC = () => {
 		ctx.beginPath();
 		ctx.arc(bhX, bhY, schwarzschildRadius * 1.02, 0, Math.PI * 2);
 		ctx.stroke();
-	}, [calculateSchwarzschildRadius]);
+	}, []);
 
 	// Draw star trails
 	// Draw star trails

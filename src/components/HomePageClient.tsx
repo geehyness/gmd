@@ -260,11 +260,10 @@ const HomePageClient: React.FC = () => {
         </SimpleGrid>
 
         {/* Public Projects Section */}
-        // In HomePageClient.tsx, around line 283:
         <Box mb={20} id="projects">
           <PublicProjects
             variant="carousel"
-            maxProjects={6} // Show only 6 projects on home page
+            maxProjects={6}
             title="Featured Projects"
             subtitle="Explore my latest work. Click on any project for detailed information."
           />
