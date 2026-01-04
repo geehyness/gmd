@@ -362,7 +362,7 @@ const HomePageClient: React.FC = () => {
             _hover={{ bg: "gray.900" }}
             rightIcon={<FaArrowRight />}
             as="a"
-            href="/Godliness_Dongorere_Resume.pdf"
+            href="/Godliness_Dongorere_Resume_Systems.pdf"
             download
           >
             Download Full Resume

@@ -75,7 +75,7 @@ export interface StarfieldConfig {
 }
 
 export const DEFAULT_CONFIG: StarfieldConfig = {
-	starCount: 200, // More stars for better coverage
+	starCount: 280, // More stars for better coverage
 	minSize: 2,
 	maxSize: 12,
 	minDepth: 0.01,
@@ -94,7 +94,7 @@ export const DEFAULT_CONFIG: StarfieldConfig = {
 	blackHole: {
 		isEnabled: true,
 		mass: 120,
-		gravity: 90, // Increased from 0.002 (100x stronger)
+		gravity: 75, // Increased from 0.002 (100x stronger)
 		attractionRadius: 900,
 		spin: 0.8,
 		accretionDisk: true,
