@@ -48,7 +48,12 @@ const colors = {
       'text-primary': '#FFFFFF',
       'text-secondary': '#A0A0A0',
       'border-color': 'rgba(64, 64, 64, 0.8)',
-    }
+      'input-bg': '#FFFFFF',
+      'input-border': '#E0E0E0',
+      'placeholder-color': '#C2C2C2',
+      'tag-bg': '#2D2D2D', // Changed from #EFEFEF to dark
+      'tag-color': '#CCCCCC', // Changed from #474747 to light
+    },
   },
   'secondary-glow': 'rgba(224,70,0,0.18)',
 };

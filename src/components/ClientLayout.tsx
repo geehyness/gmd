@@ -19,15 +19,16 @@ export default function ClientLayout({
     const pathname = usePathname();
     const isDashboardPage = pathname.startsWith('/admin') || pathname.startsWith('/dashboard');
     const isHomeViewerPage = pathname === '/house-viewer';
+    const isStarsPage = pathname === '/stars';
     const navbarType = isDashboardPage ? 'dashboard' : 'customer';
 
     return (
         <Flex direction="column" minH="100vh" className="content-above-starfield">
-            <Navbar
+            {(!isHomeViewerPage && !isStarsPage) && <Navbar
                 type={navbarType}
                 appName={siteTitle}
                 siteLogoUrl={siteLogoUrl}
-            />
+            />}
             <Box
                 pt={isHomeViewerPage ? '0' : '64px'}
                 flex="1"
@@ -36,7 +37,8 @@ export default function ClientLayout({
             >
                 {children}
             </Box>
-            {!isHomeViewerPage && <Footer appName={siteTitle} />}
+            {(!isHomeViewerPage && !isStarsPage) && <Footer appName={siteTitle} />}
+
         </Flex>
     );
 }

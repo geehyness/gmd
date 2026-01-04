@@ -44,7 +44,6 @@ The platform supports both product sales and service bookings with negotiable pr
         links: [
             { label: 'Marketplace', url: 'https://venda-khona.vercel.app' },
         ],
-        credentials: { username: 'seller@demo.com', password: 'vendakhona2024', note: 'Test seller account with sample listings' },
         year: 2024,
         role: 'Full-stack Developer & Product Designer',
         screenshotAlt: 'Venda Khona marketplace with shop listings',
