@@ -87,7 +87,7 @@ export const DEFAULT_CONFIG: StarfieldConfig = {
 	connectionChance: 1,
 	maxConnectionDistance: 100,
 	rotationSpeed: 0.0002, // HALF SPEED (was 0.0004)
-	trailOpacity: 0,
+	trailOpacity: 0.2,
 	planetChance: 0.9,
 	maxPlanetsPerStar: 8,
 	// In StarfieldContext.tsx, update the gravity value:
