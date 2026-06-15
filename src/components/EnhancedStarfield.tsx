@@ -1529,9 +1529,9 @@ const EnhancedStarfield: React.FC = () => {
 		canvas.addEventListener('touchmove', handleTouchMove);
 		canvas.addEventListener('touchend', handleTouchEnd);
 
-		if (!isMobile() || window.innerWidth > 768) {
+		//if (!isMobile() || window.innerWidth > 768) {
 			animationFrameId.current = requestAnimationFrame(animate);
-		}
+		//}
 
 		return () => {
 			window.removeEventListener('resize', handleResize);
